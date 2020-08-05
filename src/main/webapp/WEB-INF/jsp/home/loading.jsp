@@ -14,23 +14,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
+<script src="<c:url value='/css/bootstrap/js/jquery-3.5.1.min.js'/>"></script>
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <meta charset="UTF-8">
 <title>검사 로딩중</title>
 <script type="text/javaScript" language="javascript" defer="defer">
-	function main() {
-		/* location.href = "board.jsp"; */
-		location.href = "testPage.do";
+$( document ).ready(function() {
+	<c:if test="${!empty msg}">
+		alert("${msg}");
+	</c:if>
+});
+
+function main() {
+	var TRGTER = "${TRGTER}";
+	if(TRGTER == "M"){
+		location.href = "testPage.do?EXAM_ITEM_CD=C&TRGTER=M";
+	}else if(TRGTER == "P"){
+		location.href = "testPage.do?EXAM_ITEM_CD=C&TRGTER=P";
+	}else{
+		location.href = "main.do"
 	}
-	setTimeout(main, 5000);
+	
+}
+setTimeout(main, 5000);
 </script>
 </head>
 <body>
 	<div class="card text-center">
 		<div class="card-body">
-			<h1>jsp</h1>
 			<h2>5초뒤에 검사화면으로 이동합니다.</h2>
+			<div class="card text-center">
+				<div class="card-body">
+					<h1>${notice}</h1>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

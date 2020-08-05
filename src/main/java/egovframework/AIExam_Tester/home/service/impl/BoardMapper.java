@@ -7,7 +7,20 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 @Mapper("boardMapper")
 public interface BoardMapper {
-	//메인화면 병원정보 표시
-	List<BoardVO> selectHpInfo();
+
+	//병원이름
+	String getOrgNm();
+	
+	//테스트이름
+	String getTestName();
+
+	//안내문
+	String getNotice();
+
+	//초기질문 가져오기
+	String getQuestion();
+
+	//다음질문 가져오기
+	String getQuestion(int qNo);
 
 }

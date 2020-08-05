@@ -12,9 +12,15 @@
 <title>치매진단 검사도구</title>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
+<script src="<c:url value='/css/bootstrap/js/jquery-3.5.1.min.js'/>"></script>
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
+$( document ).ready(function() {
+	<c:if test="${!empty msg}">
+		alert("${msg}");
+	</c:if>
+});
+
 function button1_click() {
 	alert("버튼1을 누르셨습니다.");
 }
@@ -49,10 +55,10 @@ window.onkeydown = function()	{
 <body>
 	<div class="row" style="font-size:30px;"">
 		<div class="col-sm-2 text-center">
-			문제번호
+			${qNo}번
 		</div>
-		<div class="col-sm-8">
-			문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제문제
+		<div class="col-sm-8" id="question">
+			${question}
 		</div>
 	</div>
 	<div class="card text-center">

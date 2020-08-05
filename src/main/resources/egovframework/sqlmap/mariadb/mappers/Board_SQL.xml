@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="egovframework.AIExam_Tester.home.service.impl.BoardMapper">
-	<!-- 로그인체크 -->
-	<select id="selectHpInfo" resultType="String">
-		SELECT THI.HP_Name, THI.Test_Name
-		FROM tb_hp_info AS THI
+	<!-- 병원이름 -->
+	<select id="getOrgNm" resultType="String">
+		SELECT TCI.ORG_NM
+		FROM tc_cm_inst AS TCI
+		WHERE 1=1
+		AND	TCI.USE_YN = 'Y'
+	</select>
+	
+	<!-- 테스트이름 -->
+	<select id="getTestName" resultType="String">
+		SELECT tName
+		FROM info
 		WHERE 1=1
 	</select>
+	
+	<!-- 안내문 -->
+	<select id="getNotice" resultType="String">
+		SELECT notice
+		FROM info
+		WHERE 1=1
+	</select>
+	
+	<!-- 초기질문 가져오기 -->
+	<select id="getQuestion" resultType="String">
+		SELECT QD.question
+		FROM q_data AS QD
+		WHERE 1=1   
+		AND QD.qNo = 1 
+		AND QD.`use`='Y'
+	</select>
+	
+	<!-- 다음질문 가져오기 -->
+<!-- 	<select id="getQuestion" parameterType="int" resultType="String">
+		SELECT QD.question
+		FROM q_data AS QD
+		WHERE 1=1   
+		AND QD.qNo = #{qNo}
+		AND QD.`use`='Y'
+	</select> -->
 	
 </mapper>

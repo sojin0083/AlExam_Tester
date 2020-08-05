@@ -14,24 +14,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='/js/jquery-3.5.1.min.js'/>"></script>
+<script src="<c:url value='/css/bootstrap/js/jquery-3.5.1.min.js'/>"></script>
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <meta charset="UTF-8">
 <title>치매진단 검사도구</title>
 <script type="text/javaScript" language="javascript" defer="defer">
+function button1_click() {
+	location.href = "loading.do?TRGTER=M";
+}
+function button2_click() {
+	location.href = "loading.do?TRGTER=P";
+}
 window.onkeydown = function()	{
-	location.href = "loading.do";
+	/* 방향키 좌 */
+	if(event.keyCode == 37){
+		button1_click();
+	}
+	/* 방향키 우 */
+	if(event.keyCode == 39){
+		button2_click();
+	}
 };
 </script>
 </head>
 <body>
 	<div class="card text-center">
 		<div class="card-body">
-			<c:forEach var="infoList" items="${infoList}">
-				<%-- <h1>${infoList.Test_Name}</h1> --%>
-				<h2>아무키나 눌러주세요.</h2>
-				<%-- <h3>${infoList.HP_Name}</h3> --%>
-			</c:forEach>
+			<h1>${tName}</h1>
+			<div class="card-body align-self-center">
+			<button type="button" class="btn btn-success btn-lg" 
+				id="button1"
+				style="font-size:40px; width: 400px; height: 200px;"
+				onclick="button1_click();">본인 치매검사</button>
+			<button type="button" class="btn btn-info btn-lg" 
+				id="button2"
+				style="font-size:40px; width: 400px; height: 200px;"
+				onclick="button2_click();">가족 치매검사</button>
+			</div>
+			<h3>좌우 방향키를 눌러주세요.</h3>
+		</div>
+		<div class="card-footer">
+			<h3>${ORG_NM}</h3>
 		</div>
 	</div>
 </body>
