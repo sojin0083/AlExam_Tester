@@ -129,12 +129,18 @@ window.onkeydown = function()	{
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
   <!-- Links -->
-  <ul class="navbar-nav">
+<!--   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" href="board.html">진단하기</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="board2.html">진단완료목록</a>
+    </li>
+  </ul> -->
+  
+  <ul class="navbar-nav">
+  	<li class="nav-item">
+      <a class="nav-link" href="#">치매검사</a>
     </li>
   </ul>
 
@@ -187,7 +193,7 @@ window.onkeydown = function()	{
 			onclick="button1_click();">O</button>
 		</div>
 		<div class="card-footer text-center">
-		<input type="text" id="resCnt" value="1">
+		<input type="hidden" id="resCnt" value="1">
 			<table class="table" style="font-size:30px">
 			<thead class="thead-light">
 				<tr>
@@ -225,20 +231,20 @@ window.onkeydown = function()	{
 					<td><label id="an12" name="res12"></label></td>
 					<td><label id="an13" name="res13"></label></td>
 					<td><label id="an14" name="res14"></label></td>
-					<input type="text" name="res1" id="res1" value="">
-					<input type="text" name="res2" id="res2" value="">
-					<input type="text" name="res3" id="res3" value="">
-					<input type="text" name="res4" id="res4" value="">
-					<input type="text" name="res5" id="res5" value="">
-					<input type="text" name="res6" id="res6" value="">
-					<input type="text" name="res7" id="res7" value="">
-					<input type="text" name="res8" id="res8" value="">
-					<input type="text" name="res9" id="res9" value="">
-					<input type="text" name="res10" id="res10" value="">
-					<input type="text" name="res11" id="res11" value="">
-					<input type="text" name="res12" id="res12" value="">
-					<input type="text" name="res13" id="res13" value="">
-					<input type="text" name="res14" id="res14" value="">
+					<input type="hidden" name="res1" id="res1" value="">
+					<input type="hidden" name="res2" id="res2" value="">
+					<input type="hidden" name="res3" id="res3" value="">
+					<input type="hidden" name="res4" id="res4" value="">
+					<input type="hidden" name="res5" id="res5" value="">
+					<input type="hidden" name="res6" id="res6" value="">
+					<input type="hidden" name="res7" id="res7" value="">
+					<input type="hidden" name="res8" id="res8" value="">
+					<input type="hidden" name="res9" id="res9" value="">
+					<input type="hidden" name="res10" id="res10" value="">
+					<input type="hidden" name="res11" id="res11" value="">
+					<input type="hidden" name="res12" id="res12" value="">
+					<input type="hidden" name="res13" id="res13" value="">
+					<input type="hidden" name="res14" id="res14" value="">
 					</form>
 				</tr>
 			</tbody>

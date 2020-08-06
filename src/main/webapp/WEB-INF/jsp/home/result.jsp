@@ -29,7 +29,7 @@ $( document ).ready(function() {
 <body>
 	<div class="card text-center">
 		<div class="card-body">
-			ss
+			<h1>결과창 이동</h1>
 		</div>
 	</div>
 </body>
