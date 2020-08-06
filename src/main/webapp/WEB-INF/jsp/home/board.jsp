@@ -19,20 +19,91 @@ $( document ).ready(function() {
 	<c:if test="${!empty msg}">
 		alert("${msg}");
 	</c:if>
+	
+	var noTR = document.getElementById("noTR1");
+	var examItemTR = document.getElementById("examItemTR1");
+	var examItemCdTR = document.getElementById("examItemCdTR1");
+	
+	var no = document.getElementById("no1");
+	var examItem = document.getElementById("examItem1");
+	
+	
+	noTR.style.display = 'inline';
+	examItemTR.style.display = 'inline';
+	no.style.display = 'inline';
+	examItem.style.display = 'inline';
 });
 
+/* O key:k 마우스*/
 function button1_click() {
-	alert("버튼1을 누르셨습니다.");
+	res_process("X");
+	item_process();
 }
+
+/* X key:j 마우스*/
 function button2_click() {
-	alert("버튼2을 누르셨습니다.");
+	res_process("O");
+	item_process();
 }
+
+/* 리셋 key:m/109 */
+function button3_click() {
+	alert("리셋");
+}
+
+/* 문제 전환*/
+function item_process() {
+	var resCnt = document.getElementById("resCnt").value;
+	
+	/* 이전문제 */
+	var noTR = document.getElementById("noTR" + (parseInt(resCnt) - 1));
+	var examItemTR = document.getElementById("examItemTR" + (parseInt(resCnt) - 1));
+	var examItemCdTR = document.getElementById("examItemCdTR" + (parseInt(resCnt) - 1));
+	
+	var no = document.getElementById("no" + (parseInt(resCnt) - 1));
+	var examItem = document.getElementById("examItem" + (parseInt(resCnt) - 1));
+	
+	noTR.style.display = 'none';
+	examItemTR.style.display = 'none';
+	no.style.display = 'none';
+	examItem.style.display = 'none';
+	
+	/* 다음문제 */	
+	var noTR = document.getElementById("noTR" + resCnt);
+	var examItemTR = document.getElementById("examItemTR" + resCnt);
+	var examItemCdTR = document.getElementById("examItemCdTR" + resCnt);
+	
+	var no = document.getElementById("no" + resCnt);
+	var examItem = document.getElementById("examItem" + resCnt);
+	
+	noTR.style.display = 'inline';
+	examItemTR.style.display = 'inline';
+	no.style.display = 'inline';
+	examItem.style.display = 'inline';
+} 
+
+/* 결과 처리*/
+function res_process(res) {
+	var resCnt = document.getElementById("resCnt").value;
+	document.getElementById("resCnt").value = parseInt(resCnt) + 1;
+	$('#an' + resCnt).text(res);
+} 
+
 window.onkeydown = function()	{
+	/* 방향키 좌 */
+/* 	if(event.keyCode == 107){
+		button1_click();
+	} */
+	/* 방향키 우 */
+/* 	if(event.keyCode == 106){
+		button2_click();
+	} */
+	
 	/* 방향키 좌 */
 	if(event.keyCode == 37){
 		button1_click();
 	}
-	/* 방향키 우 */
+		/* 방향키 우 */
 	if(event.keyCode == 39){
 		button2_click();
 	}
@@ -53,26 +124,51 @@ window.onkeydown = function()	{
 
 </nav>
 <body>
-	<div class="row" style="font-size:30px;"">
-		<div class="col-sm-2 text-center">
-			${qNo}번
-		</div>
-		<div class="col-sm-8" id="question">
-			${question}
-		</div>
+	<div class="row text-center" style="font-size:40px;"">
+	<!-- ID 카운터 -->
+	<%!
+		int cnt = 1;
+	%>
+		<table class="table">
+		<c:forEach var="loadExamItem" items="${loadExamItem}">
+			<tbody>
+				<tr>
+					<td id="examItemCdTR<%=cnt%>" style="display:none;">
+						<!-- 문제코드 -->
+						<input type="hidden" id="examItemCd<%=cnt%>" value="${loadExamItem.examItemCd}">
+					</td>
+					<td id="noTR<%=cnt%>" style="display:none;">
+						<!-- 문제번호 -->
+						<!-- display:inline / display:none -->
+						<label id="no<%=cnt%>" style="display:none;">${loadExamItem.no}</label>번.
+						<input type="hidden" id="no<%=cnt%>" value="${loadExamItem.no}">
+					</td>
+					<td id="examItemTR<%=cnt%>" style="display:none;">
+						<!-- 문제 -->
+						<label id="examItem<%=cnt%>" style="display:none;">${loadExamItem.examItem}</label>
+						<input type="hidden" id="examItem<%=cnt%>" value="${loadExamItem.examItem}">
+					</td>
+				</tr>
+			</tbody>
+			<%
+				cnt = cnt + 1;
+			%>
+		</c:forEach>
+		</table>
 	</div>
 	<div class="card text-center">
 		<div class="card-body align-self-center">
-		<button type="button" class="btn btn-primary btn-lg" 
-			id="button1"
-			style="font-size:100px; width: 200px; height: 200px;"
-			onclick="button1_click();">O</button>
 		<button type="button" class="btn btn-danger btn-lg" 
 			id="button2"
 			style="font-size:100px; width: 200px; height: 200px;"
 			onclick="button2_click();">X</button>
+		<button type="button" class="btn btn-primary btn-lg" 
+			id="button1"
+			style="font-size:100px; width: 200px; height: 200px;"
+			onclick="button1_click();">O</button>
 		</div>
 		<div class="card-footer text-center">
+		<input type="hidden" id="resCnt" value="1">
 			<table class="table" style="font-size:30px">
 			<thead class="thead-light">
 				<tr>
@@ -94,20 +190,20 @@ window.onkeydown = function()	{
 			</thead>
 			<tbody>
 				<tr>
-					<td><label id="a1"></label></td>
-					<td><label id="a2"></label></td>
-					<td><label id="a3"></label></td>
-					<td><label id="a4"></label></td>
-					<td><label id="a5"></label></td>
-					<td><label id="a6"></label></td>
-					<td><label id="a7"></label></td>
-					<td><label id="a8"></label></td>
-					<td><label id="a9"></label></td>
-					<td><label id="a10"></label></td>
-					<td><label id="a11"></label></td>
-					<td><label id="a12"></label></td>
-					<td><label id="a13"></label></td>
-					<td><label id="a14"></label></td>
+					<td><label id="an1"></label></td>
+					<td><label id="an2"></label></td>
+					<td><label id="an3"></label></td>
+					<td><label id="an4"></label></td>
+					<td><label id="an5"></label></td>
+					<td><label id="an6"></label></td>
+					<td><label id="an7"></label></td>
+					<td><label id="an8"></label></td>
+					<td><label id="an9"></label></td>
+					<td><label id="an10"></label></td>
+					<td><label id="an11"></label></td>
+					<td><label id="an12"></label></td>
+					<td><label id="an13"></label></td>
+					<td><label id="an14"></label></td>
 				</tr>
 			</tbody>
 			</table>

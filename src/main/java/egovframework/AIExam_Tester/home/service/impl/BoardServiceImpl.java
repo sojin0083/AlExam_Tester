@@ -22,32 +22,9 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return boardDAO.getOrgNm();
 	}
 
-	//테스트이름
+	//질문 가져오기
 	@Override
-	public String getTestName() {
-		// TODO Auto-generated method stub
-		return boardDAO.getTestName();
+	public List<BoardVO> loadExamItem(BoardVO boardVO) {
+		return boardDAO.loadExamItem(boardVO);
 	}
-
-	//안내문
-	@Override
-	public String getNotice() {
-		// TODO Auto-generated method stub
-		return boardDAO.getNotice();
-	}
-
-	//초기질문 가져오기
-	@Override
-	public String getQuestion() {
-		// TODO Auto-generated method stub
-		return boardDAO.getQuestion();
-	}
-
-	//다음질문가져오기
-	@Override
-	public String getQuestion(int qNo) {
-		// TODO Auto-generated method stub
-		return boardDAO.getQuestion(qNo);
-	}
-
 }

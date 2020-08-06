@@ -1,41 +1,40 @@
 package egovframework.AIExam_Tester.home.service;
 
 public class InstVO {
-	public String ORG_NM;
-	public String ORG_CD;
-	public String USE_YN;
-	public String INST_CD;
-	public String REG_INST;
+	public String orgNm;
+	public String orgCd;
+	public String useYn;
+	public String instCd;
+	public String regInst;
 	
-	public String getORG_NM() {
-		return ORG_NM;
+	public String getOrgNm() {
+		return orgNm;
 	}
-	public void setORG_NM(String oRG_NM) {
-		ORG_NM = oRG_NM;
+	public void setOrgNm(String orgNm) {
+		this.orgNm = orgNm;
 	}
-	public String getORG_CD() {
-		return ORG_CD;
+	public String getOrgCd() {
+		return orgCd;
 	}
-	public void setORG_CD(String oRG_CD) {
-		ORG_CD = oRG_CD;
+	public void setOrgCd(String orgCd) {
+		this.orgCd = orgCd;
 	}
-	public String getUSE_YN() {
-		return USE_YN;
+	public String getUseYn() {
+		return useYn;
 	}
-	public void setUSE_YN(String uSE_YN) {
-		USE_YN = uSE_YN;
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
 	}
-	public String getINST_CD() {
-		return INST_CD;
+	public String getInstCd() {
+		return instCd;
 	}
-	public void setINST_CD(String iNST_CD) {
-		INST_CD = iNST_CD;
+	public void setInstCd(String instCd) {
+		this.instCd = instCd;
 	}
-	public String getREG_INST() {
-		return REG_INST;
+	public String getRegInst() {
+		return regInst;
 	}
-	public void setREG_INST(String rEG_INST) {
-		REG_INST = rEG_INST;
+	public void setRegInst(String regInst) {
+		this.regInst = regInst;
 	}
-	
 }

@@ -11,16 +11,7 @@ public interface BoardMapper {
 	//병원이름
 	String getOrgNm();
 	
-	//테스트이름
-	String getTestName();
-
-	//안내문
-	String getNotice();
-
-	//초기질문 가져오기
-	String getQuestion();
-
-	//다음질문 가져오기
-	String getQuestion(int qNo);
+	//질문 가져오기
+	List<BoardVO> loadExamItem(BoardVO boardVO);
 
 }
