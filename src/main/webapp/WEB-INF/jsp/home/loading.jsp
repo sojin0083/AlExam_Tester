@@ -36,7 +36,7 @@ function main() {
 	}
 	
 }
-setTimeout(main, 5000);
+setTimeout(main, 2000);
 </script>
 </head>
 <body>

@@ -81,24 +81,41 @@ public class HomeController {
 			return "index";
 		}
 		request.setAttribute("loadExamItem", loadExamItem);
-		
-//		int a = 1;
-//		
-//		System.out.println(String.format("%02d", a));
-//
-//		int qNo = 1;
-//		String question = "";
+		return "home/board";
+	}
+	
+	//결과 불러오기
+	@RequestMapping(value = "/result_load.do")
+	public String result_load(HttpServletRequest request,  HttpSession session, 
+			@RequestParam("res1") String res1,
+			@RequestParam("res2") String res2,
+			@RequestParam("res3") String res3,
+			@RequestParam("res4") String res4,
+			@RequestParam("res5") String res5,
+			@RequestParam("res6") String res6,
+			@RequestParam("res7") String res7,
+			@RequestParam("res8") String res8,
+			@RequestParam("res9") String res9,
+			@RequestParam("res10") String res10,
+			@RequestParam("res11") String res11,
+			@RequestParam("res12") String res12,
+			@RequestParam("res13") String res13,
+			@RequestParam("res14") String res14) throws Exception {
+		System.out.println("결과 불러오기 화면");
+		System.out.println(res1);
+		System.out.println(res2);
+		 
+//		//작성한 업무보고 불러오기
+//		List<BoardVO> loadExamItem = null;
 //		try {
-//			question = boardService.getQuestion();
-//			request.setAttribute("question", question);
-//			request.setAttribute("qNo", qNo);
+//			loadExamItem = boardService.loadExamItem(boardVO);
 //		}catch(Exception e) {
 //			System.out.println("에러 : " + e);
-//			request.setAttribute("msg", "조회중 에러가 발생했습니다.");
+//			request.setAttribute("msg", "문제 조회중 에러가 발생했습니다.");
 //			return "index";
 //		}
-		
-		return "home/board";
+//		request.setAttribute("loadExamItem", loadExamItem);
+		return "home/result";
 	}
 	
 }

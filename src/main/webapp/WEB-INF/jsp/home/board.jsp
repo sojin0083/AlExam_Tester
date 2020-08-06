@@ -48,45 +48,53 @@ function button2_click() {
 
 /* 리셋 key:m/109 */
 function button3_click() {
-	alert("리셋");
+	location.href = "main.do";
 }
 
 /* 문제 전환*/
 function item_process() {
 	var resCnt = document.getElementById("resCnt").value;
-	
-	/* 이전문제 */
-	var noTR = document.getElementById("noTR" + (parseInt(resCnt) - 1));
-	var examItemTR = document.getElementById("examItemTR" + (parseInt(resCnt) - 1));
-	var examItemCdTR = document.getElementById("examItemCdTR" + (parseInt(resCnt) - 1));
-	
-	var no = document.getElementById("no" + (parseInt(resCnt) - 1));
-	var examItem = document.getElementById("examItem" + (parseInt(resCnt) - 1));
-	
-	noTR.style.display = 'none';
-	examItemTR.style.display = 'none';
-	no.style.display = 'none';
-	examItem.style.display = 'none';
-	
-	/* 다음문제 */	
-	var noTR = document.getElementById("noTR" + resCnt);
-	var examItemTR = document.getElementById("examItemTR" + resCnt);
-	var examItemCdTR = document.getElementById("examItemCdTR" + resCnt);
-	
-	var no = document.getElementById("no" + resCnt);
-	var examItem = document.getElementById("examItem" + resCnt);
-	
-	noTR.style.display = 'inline';
-	examItemTR.style.display = 'inline';
-	no.style.display = 'inline';
-	examItem.style.display = 'inline';
+	if(parseInt(resCnt) < 15){
+		/* 이전문제 */
+		var noTR = document.getElementById("noTR" + (parseInt(resCnt) - 1));
+		var examItemTR = document.getElementById("examItemTR" + (parseInt(resCnt) - 1));
+		var examItemCdTR = document.getElementById("examItemCdTR" + (parseInt(resCnt) - 1));
+		
+		var no = document.getElementById("no" + (parseInt(resCnt) - 1));
+		var examItem = document.getElementById("examItem" + (parseInt(resCnt) - 1));
+		
+		noTR.style.display = 'none';
+		examItemTR.style.display = 'none';
+		no.style.display = 'none';
+		examItem.style.display = 'none';
+		
+		/* 다음문제 */	
+		var noTR = document.getElementById("noTR" + resCnt);
+		var examItemTR = document.getElementById("examItemTR" + resCnt);
+		var examItemCdTR = document.getElementById("examItemCdTR" + resCnt);
+		
+		var no = document.getElementById("no" + resCnt);
+		var examItem = document.getElementById("examItem" + resCnt);
+		
+		noTR.style.display = 'inline';
+		examItemTR.style.display = 'inline';
+		no.style.display = 'inline';
+		examItem.style.display = 'inline';
+	}
 } 
 
 /* 결과 처리*/
 function res_process(res) {
 	var resCnt = document.getElementById("resCnt").value;
-	document.getElementById("resCnt").value = parseInt(resCnt) + 1;
-	$('#an' + resCnt).text(res);
+	if(parseInt(resCnt) < 15){
+		document.getElementById("resCnt").value = parseInt(resCnt) + 1;
+		$('#an' + resCnt).text(res);
+		document.getElementById("res" + resCnt).value = res; 
+	}
+	resCnt = document.getElementById("resCnt").value;
+	if(resCnt == '15'){
+		document.result_load.submit();
+	}
 } 
 
 window.onkeydown = function()	{
@@ -98,14 +106,22 @@ window.onkeydown = function()	{
 /* 	if(event.keyCode == 106){
 		button2_click();
 	} */
+	/* 리셋 */
+/* 	if(event.keyCode == 109){
+		button2_click();
+	} */
 	
 	/* 방향키 좌 */
 	if(event.keyCode == 37){
 		button1_click();
 	}
-		/* 방향키 우 */
-	if(event.keyCode == 39){
+	/* 방향키 우 */
+	else if(event.keyCode == 39){
 		button2_click();
+	}
+	/* 방향키 상*/
+	else if(event.keyCode == 38){
+		button3_click();
 	}
 };
 </script>
@@ -128,6 +144,9 @@ window.onkeydown = function()	{
 	<!-- ID 카운터 -->
 	<%!
 		int cnt = 1;
+	%>
+	<%
+		cnt = 1; 
 	%>
 		<table class="table">
 		<c:forEach var="loadExamItem" items="${loadExamItem}">
@@ -168,7 +187,7 @@ window.onkeydown = function()	{
 			onclick="button1_click();">O</button>
 		</div>
 		<div class="card-footer text-center">
-		<input type="hidden" id="resCnt" value="1">
+		<input type="text" id="resCnt" value="1">
 			<table class="table" style="font-size:30px">
 			<thead class="thead-light">
 				<tr>
@@ -190,20 +209,37 @@ window.onkeydown = function()	{
 			</thead>
 			<tbody>
 				<tr>
-					<td><label id="an1"></label></td>
-					<td><label id="an2"></label></td>
-					<td><label id="an3"></label></td>
-					<td><label id="an4"></label></td>
-					<td><label id="an5"></label></td>
-					<td><label id="an6"></label></td>
-					<td><label id="an7"></label></td>
-					<td><label id="an8"></label></td>
-					<td><label id="an9"></label></td>
-					<td><label id="an10"></label></td>
-					<td><label id="an11"></label></td>
-					<td><label id="an12"></label></td>
-					<td><label id="an13"></label></td>
-					<td><label id="an14"></label></td>
+					<%-- <form class="form-inline" method="post" action="<c:url value='/result_load.do'/>"> --%>
+					<form name="result_load" id="result_load" class="form-inline" method="post" action="<c:url value='/result_load.do'/>">
+					<td><label id="an1" name="res1"></label></td>
+					<td><label id="an2" name="res2"></label></td>
+					<td><label id="an3" name="res3"></label></td>
+					<td><label id="an4" name="res4"></label></td>
+					<td><label id="an5" name="res5"></label></td>
+					<td><label id="an6" name="res6"></label></td>
+					<td><label id="an7" name="res7"></label></td>
+					<td><label id="an8" name="res8"></label></td>
+					<td><label id="an9" name="res9"></label></td>
+					<td><label id="an10" name="res10"></label></td>
+					<td><label id="an11" name="res11"></label></td>
+					<td><label id="an12" name="res12"></label></td>
+					<td><label id="an13" name="res13"></label></td>
+					<td><label id="an14" name="res14"></label></td>
+					<input type="text" name="res1" id="res1" value="">
+					<input type="text" name="res2" id="res2" value="">
+					<input type="text" name="res3" id="res3" value="">
+					<input type="text" name="res4" id="res4" value="">
+					<input type="text" name="res5" id="res5" value="">
+					<input type="text" name="res6" id="res6" value="">
+					<input type="text" name="res7" id="res7" value="">
+					<input type="text" name="res8" id="res8" value="">
+					<input type="text" name="res9" id="res9" value="">
+					<input type="text" name="res10" id="res10" value="">
+					<input type="text" name="res11" id="res11" value="">
+					<input type="text" name="res12" id="res12" value="">
+					<input type="text" name="res13" id="res13" value="">
+					<input type="text" name="res14" id="res14" value="">
+					</form>
 				</tr>
 			</tbody>
 			</table>

@@ -17,44 +17,19 @@
 <script src="<c:url value='/css/bootstrap/js/jquery-3.5.1.min.js'/>"></script>
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <meta charset="UTF-8">
-<title>치매진단 검사도구</title>
+<title>검사 결과</title>
 <script type="text/javaScript" language="javascript" defer="defer">
-function button1_click() {
-	location.href = "loading.do?TRGTER=M";
-}
-function button2_click() {
-	location.href = "loading.do?TRGTER=P";
-}
-window.onkeydown = function()	{
-	/* 방향키 좌 */
-	if(event.keyCode == 37){
-		button1_click();
-	}
-	/* 방향키 우 */
-	if(event.keyCode == 39){
-		button2_click();
-	}
-};
+$( document ).ready(function() {
+	<c:if test="${!empty msg}">
+		alert("${msg}");
+	</c:if>
+});
 </script>
 </head>
 <body>
 	<div class="card text-center">
 		<div class="card-body">
-			<h1>온라인 치매검사</h1>
-			<div class="card-body align-self-center">
-			<button type="button" class="btn btn-success btn-lg" 
-				id="button1"
-				style="font-size:40px; width: 400px; height: 200px;"
-				onclick="button1_click();">본인 치매검사</button>
-			<button type="button" class="btn btn-info btn-lg" 
-				id="button2"
-				style="font-size:40px; width: 400px; height: 200px;"
-				onclick="button2_click();">가족 치매검사</button>
-			</div>
-			<h3>좌우 방향키를 눌러주세요.</h3>
-		</div>
-		<div class="card-footer">
-			<h3>${ORG_NM}</h3>
+			ss
 		</div>
 	</div>
 </body>
