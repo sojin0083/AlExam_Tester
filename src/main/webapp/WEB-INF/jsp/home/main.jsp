@@ -25,17 +25,39 @@ function button1_click() {
 function button2_click() {
 	location.href = "loading.do?TRGTER=P";
 }
+
 window.onkeydown = function()	{
 	/* 방향키 좌 */
-	if(event.keyCode == 37){
+	if(event.keyCode == /* 107 */37){
 		button1_click();
 	}
 	/* 방향키 우 */
-	if(event.keyCode == 39){
+	if(event.keyCode == /* 106 */39){
 		button2_click();
 	}
 };
 </script>
+
+<!-- <script language="javascript">
+var msg = new SpeechSynthesisUtterance();
+msg.lang = 'en-US';
+    function ttsTest(){
+
+          msg.rate = 1.2; // 0.1 ~ 10      
+          msg.pitch = 1.3; // 0 ~ 2
+       
+        msg.text = "당신의 기억력은 10년 전에 비해 저하되었습니까?";
+        speechSynthesis.speak(msg);
+        }
+    function setLang(langTxt){
+        msg.lang = langTxt;
+        }
+</script>
+<button onclick="setLang('euc-kr'); ttsTest();">Click2</button> -->
+
+
+
+
 </head>
 <body>
 	<div class="card text-center">

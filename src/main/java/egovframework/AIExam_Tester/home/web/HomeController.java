@@ -1,6 +1,8 @@
 package egovframework.AIExam_Tester.home.web;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,11 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import egovframework.AIExam_Tester.home.service.BoardService;
 import egovframework.AIExam_Tester.home.service.BoardVO;
+import egovframework.AIExam_Tester.home.service.InstVO;
+import egovframework.AIExam_Tester.home.service.ResultVO;
 
 @Controller
 public class HomeController {
 	@Resource(name = "boardService")
 	private BoardService boardService;
+	
+	//메세지처리
+	String msg = null, url = null;
 	
 	//메인화면
 	@RequestMapping(value = "/main.do")
@@ -29,9 +36,11 @@ public class HomeController {
 			orgNm = boardService.getOrgNm();
 			request.setAttribute("ORG_NM", orgNm);
 		}catch(Exception e) {
-			System.out.println("에러 : " + e);
-			request.setAttribute("msg", "조회중 에러가 발생했습니다.");
-			return "index";
+			msg = "조회중 에러가 발생했습니다.";
+			url = "main.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("url", url);
+			return "message";
 		}
 		
 		return "home/main";
@@ -54,9 +63,11 @@ public class HomeController {
 			request.setAttribute("TRGTER", trgter);
 			request.setAttribute("notice", notice);
 		}catch(Exception e) {
-			System.out.println("에러 : " + e);
-			request.setAttribute("msg", "조회중 에러가 발생했습니다.");
-			return "index";
+			msg = "문제 조회중 에러가 발생했습니다.";
+			url = "main.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("url", url);
+			return "message";
 		}
 		
 		return "home/loading";
@@ -71,50 +82,101 @@ public class HomeController {
 		BoardVO boardVO = new BoardVO();
 		boardVO.setTrgter(trgter);
 		
-		//작성한 업무보고 불러오기
+		//문제 불러오기
 		List<BoardVO> loadExamItem = null;
 		try {
 			loadExamItem = boardService.loadExamItem(boardVO);
 		}catch(Exception e) {
-			System.out.println("에러 : " + e);
-			request.setAttribute("msg", "문제 조회중 에러가 발생했습니다.");
-			return "index";
+			msg = "문제 조회중 에러가 발생했습니다.";
+			url = "main.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("url", url);
+			return "message";
 		}
 		request.setAttribute("loadExamItem", loadExamItem);
+		request.setAttribute("trgter", trgter);
 		return "home/board";
 	}
 	
 	//결과 불러오기
 	@RequestMapping(value = "/result_load.do")
 	public String result_load(HttpServletRequest request,  HttpSession session, 
-			@RequestParam("res1") String res1,
-			@RequestParam("res2") String res2,
-			@RequestParam("res3") String res3,
-			@RequestParam("res4") String res4,
-			@RequestParam("res5") String res5,
-			@RequestParam("res6") String res6,
-			@RequestParam("res7") String res7,
-			@RequestParam("res8") String res8,
-			@RequestParam("res9") String res9,
-			@RequestParam("res10") String res10,
-			@RequestParam("res11") String res11,
-			@RequestParam("res12") String res12,
-			@RequestParam("res13") String res13,
-			@RequestParam("res14") String res14) throws Exception {
+			@RequestParam("examItemCd") String[] examItemCd,
+			@RequestParam("res") String[] res, 
+			@RequestParam("TRGTER") String trgter) throws Exception {
 		System.out.println("결과 불러오기 화면");
-		System.out.println(res1);
-		System.out.println(res2);
-		 
-//		//작성한 업무보고 불러오기
-//		List<BoardVO> loadExamItem = null;
-//		try {
-//			loadExamItem = boardService.loadExamItem(boardVO);
-//		}catch(Exception e) {
-//			System.out.println("에러 : " + e);
-//			request.setAttribute("msg", "문제 조회중 에러가 발생했습니다.");
-//			return "index";
-//		}
-//		request.setAttribute("loadExamItem", loadExamItem);
+				
+		String orgCd, instCd, rNumber = "";
+		int resCnt = 0;
+		
+		InstVO instVO = new InstVO();
+		ResultVO resVO = new ResultVO();
+		try {
+			//기기사용여부 확인
+			String checkInstYn = boardService.checkInst();
+			if(checkInstYn.equals("N")) {
+				msg = "이기기는 사용하실수 없습니다.";
+				url = "main.do";
+				request.setAttribute("msg", msg);
+				request.setAttribute("url", url);
+				return "message";
+			}
+			
+			//기관코드, 기기코드 가져오기
+			instVO.setUseYn("Y");
+			orgCd = boardService.loadOrgCd(instVO);
+			instCd = boardService.loadInstCd(instVO);
+			
+			//날짜가져오기
+			SimpleDateFormat format1 = new SimpleDateFormat ( "-yyMMdd-HHmm");
+			Date time = new Date();
+			String now = format1.format(time);
+			
+			//병록번호 제작
+			rNumber = orgCd + instCd + now;
+			
+			//DB저장
+			resVO.setrNumber(rNumber);
+			resVO.setTrgter(trgter);
+			resVO.setCkUp("N");
+			for(int i = 0; i < res.length; i++) {
+				resVO.setExamItemCd(examItemCd[i]);
+				resVO.setResOx(res[i]);
+				boardService.saveRes(resVO);
+			}
+		}catch(Exception e) {
+			msg = "DB가 올바르지 않습니다.";
+			url = "main.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("url", url);
+			return "message";
+		}
+		
+		//결과 불러오기
+		BoardVO boardVO = new BoardVO();
+		boardVO.setTrgter(trgter);
+		resVO.setrNumber(rNumber);
+		//문제 불러오기
+		List<BoardVO> loadExamItem = null;
+		//답안 불러오기
+		List<ResultVO> loadExamRes = null;
+		try {
+			//문제,답안불러오기 (사용안함).
+			//loadExamItem = boardService.loadExamItem(boardVO);
+			//loadExamRes = boardService.loadExamRes(resVO);
+			//O갯수 불러오기
+			resCnt = boardService.loadExamResCnt(resVO);
+		}catch(Exception e) {
+			msg = "정보를 불러오는데 실패했습니다.";
+			url = "main.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("url", url);
+			return "message";
+		}
+		//request.setAttribute("loadExamItem", loadExamItem);
+		//request.setAttribute("loadExamRes", loadExamRes);
+		request.setAttribute("resCnt", resCnt);
+		
 		return "home/result";
 	}
 	

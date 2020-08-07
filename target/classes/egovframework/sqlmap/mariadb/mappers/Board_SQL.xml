@@ -9,7 +9,7 @@
 		AND	TCI.USE_YN = 'Y'
 	</select>
 	
-	<!-- 테스트이름 -->
+	<!-- 문제가져오기 -->
 	<select id="loadExamItem" parameterType="BoardVO" resultType="BoardVO">
 		SELECT @rownum:=@rownum+1 AS no, TCKI.EXAM_ITEM_CD AS examItemCd, TCKI.EXAM_ITEM AS examItem, TCKI.TRGTER AS trgter
 		FROM tn_cm_kdsqc_item AS TCKI, 
@@ -17,6 +17,53 @@
 		WHERE 1=1
 		AND TCKI.TRGTER = #{trgter}
 		AND TCKI.USE_YN = 'Y'
+	</select>
+	
+	<!-- 기기사용여부 확인 -->
+	<select id="checkInst" resultType="String">
+		SELECT TCI.USE_YN
+		FROM tc_cm_inst AS TCI
+		WHERE 1=1
+	</select>
+	
+	<!-- 기관코드 -->
+	<select id="loadOrgCd" parameterType="InstVO" resultType="String">
+		SELECT TCI.ORG_CD AS orgCd
+		FROM tc_cm_inst AS TCI
+		WHERE 1=1
+		AND TCI.USE_YN = #{useYn}
+	</select>
+	
+	<!-- 기기코드 -->
+	<select id="loadInstCd" parameterType="InstVO" resultType="String">
+		SELECT TCI.INST_CD AS instCd
+		FROM tc_cm_inst AS TCI
+		WHERE 1=1
+		AND TCI.USE_YN = #{useYn}
+	</select>
+	
+	<insert id="saveRes" parameterType="ResultVO">
+		INSERT INTO tm_cm_kdsqc_res
+		VALUES(#{rNumber}, #{trgter}, #{examItemCd}, #{resOx}, #{ckUp})
+	</insert>
+	
+	<!-- 답안가져오기 -->
+	<select id="loadExamRes" parameterType="ResultVO" resultType="ResultVO">
+		SELECT TCKR.R_NUMBER AS rNumber, EXAM_ITEM_CD AS examItemCd, TCKR.RES_OX AS resOx
+		FROM tm_cm_kdsqc_res AS TCKR
+		WHERE 1=1
+		AND TCKR.R_NUMBER = #{rNumber}
+		AND TCKR.TRGTER = #{trgter}
+	</select>
+	
+	<!-- 답안가져오기 -->
+	<select id="loadExamResCnt" parameterType="ResultVO" resultType="int">
+		SELECT COUNT(*)
+		FROM tm_cm_kdsqc_res AS TCKR
+		WHERE 1=1
+		AND TCKR.R_NUMBER = #{rNumber}
+		AND TCKR.TRGTER = #{trgter}
+		AND TCKR.RES_OX = 'O'
 	</select>
 	
 </mapper>

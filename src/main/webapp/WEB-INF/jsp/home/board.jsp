@@ -36,13 +36,13 @@ $( document ).ready(function() {
 
 /* O key:k 마우스*/
 function button1_click() {
-	res_process("X");
+	res_process("O");
 	item_process();
 }
 
 /* X key:j 마우스*/
 function button2_click() {
-	res_process("O");
+	res_process("X");
 	item_process();
 }
 
@@ -98,28 +98,26 @@ function res_process(res) {
 } 
 
 window.onkeydown = function()	{
-	/* 방향키 좌 */
-/* 	if(event.keyCode == 107){
+	/* 방향키 좌  방향키 우 방향키 상*/
+/*  	if(event.keyCode == 107){
 		button1_click();
-	} */
-	/* 방향키 우 */
-/* 	if(event.keyCode == 106){
+	}
+ 	if(event.keyCode == 106){
 		button2_click();
-	} */
-	/* 리셋 */
-/* 	if(event.keyCode == 109){
+	} 
+ 	if(event.keyCode == 109){
 		button2_click();
 	} */
 	
-	/* 방향키 좌 */
-	if(event.keyCode == 37){
+	/* 방향키 좌  방향키 우 방향키 상*/
+ 	if(event.keyCode == 37){
 		button1_click();
 	}
-	/* 방향키 우 */
+	
 	else if(event.keyCode == 39){
 		button2_click();
 	}
-	/* 방향키 상*/
+	
 	else if(event.keyCode == 38){
 		button3_click();
 	}
@@ -186,11 +184,11 @@ window.onkeydown = function()	{
 		<button type="button" class="btn btn-danger btn-lg" 
 			id="button2"
 			style="font-size:100px; width: 200px; height: 200px;"
-			onclick="button2_click();">X</button>
+			onclick="button1_click();">O</button>
 		<button type="button" class="btn btn-primary btn-lg" 
 			id="button1"
 			style="font-size:100px; width: 200px; height: 200px;"
-			onclick="button1_click();">O</button>
+			onclick="button2_click();">X</button>
 		</div>
 		<div class="card-footer text-center">
 		<input type="hidden" id="resCnt" value="1">
@@ -231,20 +229,25 @@ window.onkeydown = function()	{
 					<td><label id="an12" name="res12"></label></td>
 					<td><label id="an13" name="res13"></label></td>
 					<td><label id="an14" name="res14"></label></td>
-					<input type="hidden" name="res1" id="res1" value="">
-					<input type="hidden" name="res2" id="res2" value="">
-					<input type="hidden" name="res3" id="res3" value="">
-					<input type="hidden" name="res4" id="res4" value="">
-					<input type="hidden" name="res5" id="res5" value="">
-					<input type="hidden" name="res6" id="res6" value="">
-					<input type="hidden" name="res7" id="res7" value="">
-					<input type="hidden" name="res8" id="res8" value="">
-					<input type="hidden" name="res9" id="res9" value="">
-					<input type="hidden" name="res10" id="res10" value="">
-					<input type="hidden" name="res11" id="res11" value="">
-					<input type="hidden" name="res12" id="res12" value="">
-					<input type="hidden" name="res13" id="res13" value="">
-					<input type="hidden" name="res14" id="res14" value="">
+					<input type="hidden" name="res" id="res1" value="">
+					<input type="hidden" name="res" id="res2" value="">
+					<input type="hidden" name="res" id="res3" value="">
+					<input type="hidden" name="res" id="res4" value="">
+					<input type="hidden" name="res" id="res5" value="">
+					<input type="hidden" name="res" id="res6" value="">
+					<input type="hidden" name="res" id="res7" value=""> 
+					<input type="hidden" name="res" id="res8" value="">
+					<input type="hidden" name="res" id="res9" value="">
+					<input type="hidden" name="res" id="res10" value="">
+					<input type="hidden" name="res" id="res11" value="">
+					<input type="hidden" name="res" id="res12" value="">
+					<input type="hidden" name="res" id="res13" value="">
+					<input type="hidden" name="res" id="res14" value="">
+					<input type="hidden" name="TRGTER" value="${trgter}">
+					<c:forEach var="loadExamItem" items="${loadExamItem}">
+						<!-- 문제코드 --> 
+						<input type="hidden" name="examItemCd"value="${loadExamItem.examItemCd}">		
+					</c:forEach>
 					</form>
 				</tr>
 			</tbody>

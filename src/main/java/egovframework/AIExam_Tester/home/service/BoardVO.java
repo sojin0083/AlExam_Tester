@@ -4,7 +4,7 @@ public class BoardVO {
 	public int no;
 	public String examItemCd;
 	public String examItem;
-	public String useTn;
+	public String useYn;
 	public String trgter;
 	
 	public int getNo() {
@@ -25,17 +25,16 @@ public class BoardVO {
 	public void setExamItem(String examItem) {
 		this.examItem = examItem;
 	}
-	public String getUseTn() {
-		return useTn;
+	public String getUseYn() {
+		return useYn;
 	}
-	public void setUseTn(String useTn) {
-		this.useTn = useTn;
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
 	}
 	public String getTrgter() {
 		return trgter;
 	}
 	public void setTrgter(String trgter) {
 		this.trgter = trgter;
-	}
-	
+	}	
 }
