@@ -24,6 +24,12 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		return boardDAO.getOrgNm();
 	}
 
+	//문제갯수 불러오기
+	@Override
+	public int examCnt(BoardVO boardVO) {
+		return boardDAO.examCnt(boardVO);
+	}
+	
 	//질문 가져오기
 	@Override
 	public List<BoardVO> loadExamItem(BoardVO boardVO) {

@@ -13,6 +13,9 @@ public interface BoardMapper {
 	//병원이름
 	String getOrgNm();
 	
+	//문제갯수불러오기
+	int examCnt(BoardVO boardVO);
+	
 	//질문 가져오기
 	List<BoardVO> loadExamItem(BoardVO boardVO);
 

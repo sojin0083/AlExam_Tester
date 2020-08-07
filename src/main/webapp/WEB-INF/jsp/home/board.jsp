@@ -54,7 +54,8 @@ function button3_click() {
 /* 문제 전환*/
 function item_process() {
 	var resCnt = document.getElementById("resCnt").value;
-	if(parseInt(resCnt) < 15){
+	var examCnt = ${examCnt}+1
+	if(parseInt(resCnt) < examCnt){
 		/* 이전문제 */
 		var noTR = document.getElementById("noTR" + (parseInt(resCnt) - 1));
 		var examItemTR = document.getElementById("examItemTR" + (parseInt(resCnt) - 1));
@@ -86,13 +87,14 @@ function item_process() {
 /* 결과 처리*/
 function res_process(res) {
 	var resCnt = document.getElementById("resCnt").value;
-	if(parseInt(resCnt) < 15){
+	var examCnt = ${examCnt}+1
+	if(parseInt(resCnt) < examCnt){
 		document.getElementById("resCnt").value = parseInt(resCnt) + 1;
 		$('#an' + resCnt).text(res);
 		document.getElementById("res" + resCnt).value = res; 
 	}
 	resCnt = document.getElementById("resCnt").value;
-	if(resCnt == '15'){
+	if(resCnt == examCnt){
 		document.result_load.submit();
 	}
 } 
@@ -195,54 +197,25 @@ window.onkeydown = function()	{
 			<table class="table" style="font-size:30px">
 			<thead class="thead-light">
 				<tr>
-					<td width="7.14%">1</td>
-					<td width="7.14%">2</td>
-					<td width="7.14%">3</td>
-					<td width="7.14%">4</td>
-					<td width="7.14%">5</td>
-					<td width="7.14%">6</td>
-					<td width="7.14%">7</td>
-					<td width="7.14%">8</td>
-					<td width="7.14%">9</td>
-					<td width="7.14%">10</td>
-					<td width="7.14%">11</td>
-					<td width="7.14%">12</td>
-					<td width="7.14%">13</td>
-					<td width="7.14%">14</td>
+					<c:forEach var="loadExamItem" items="${loadExamItem}">
+						<td>${loadExamItem.no}</td>
+					</c:forEach>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<%-- <form class="form-inline" method="post" action="<c:url value='/result_load.do'/>"> --%>
 					<form name="result_load" id="result_load" class="form-inline" method="post" action="<c:url value='/result_load.do'/>">
-					<td><label id="an1" name="res1"></label></td>
-					<td><label id="an2" name="res2"></label></td>
-					<td><label id="an3" name="res3"></label></td>
-					<td><label id="an4" name="res4"></label></td>
-					<td><label id="an5" name="res5"></label></td>
-					<td><label id="an6" name="res6"></label></td>
-					<td><label id="an7" name="res7"></label></td>
-					<td><label id="an8" name="res8"></label></td>
-					<td><label id="an9" name="res9"></label></td>
-					<td><label id="an10" name="res10"></label></td>
-					<td><label id="an11" name="res11"></label></td>
-					<td><label id="an12" name="res12"></label></td>
-					<td><label id="an13" name="res13"></label></td>
-					<td><label id="an14" name="res14"></label></td>
-					<input type="hidden" name="res" id="res1" value="">
-					<input type="hidden" name="res" id="res2" value="">
-					<input type="hidden" name="res" id="res3" value="">
-					<input type="hidden" name="res" id="res4" value="">
-					<input type="hidden" name="res" id="res5" value="">
-					<input type="hidden" name="res" id="res6" value="">
-					<input type="hidden" name="res" id="res7" value=""> 
-					<input type="hidden" name="res" id="res8" value="">
-					<input type="hidden" name="res" id="res9" value="">
-					<input type="hidden" name="res" id="res10" value="">
-					<input type="hidden" name="res" id="res11" value="">
-					<input type="hidden" name="res" id="res12" value="">
-					<input type="hidden" name="res" id="res13" value="">
-					<input type="hidden" name="res" id="res14" value="">
+					<%
+						cnt = 1; 
+					%>
+					<c:forEach var="loadExamItem" items="${loadExamItem}">
+						<td><label id="an<%=cnt%>" name="res<%=cnt%>"></label></td>
+						<input type="hidden" name="res" id="res<%=cnt%>" value="">
+						<%
+							cnt = cnt + 1;
+						%>
+					</c:forEach>
 					<input type="hidden" name="TRGTER" value="${trgter}">
 					<c:forEach var="loadExamItem" items="${loadExamItem}">
 						<!-- 문제코드 --> 

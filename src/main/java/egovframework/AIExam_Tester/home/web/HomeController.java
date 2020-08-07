@@ -82,10 +82,13 @@ public class HomeController {
 		BoardVO boardVO = new BoardVO();
 		boardVO.setTrgter(trgter);
 		
+		int examCnt = 0;
+		
 		//문제 불러오기
 		List<BoardVO> loadExamItem = null;
 		try {
 			loadExamItem = boardService.loadExamItem(boardVO);
+			examCnt = boardService.examCnt(boardVO);
 		}catch(Exception e) {
 			msg = "문제 조회중 에러가 발생했습니다.";
 			url = "main.do";
@@ -94,6 +97,7 @@ public class HomeController {
 			return "message";
 		}
 		request.setAttribute("loadExamItem", loadExamItem);
+		request.setAttribute("examCnt", examCnt);
 		request.setAttribute("trgter", trgter);
 		return "home/board";
 	}
