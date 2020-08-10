@@ -6,15 +6,10 @@
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<%
-	//String msg = (String)request.getAttribute("msg");
-	//String url = (String)request.getAttribute("url");
-%>
-<script type="text/javascript">
-	alert("${msg}")
-	if("${url}" == "return"){
-		window.close(); 
-	}else{
-		location.href="${url}"
-	}
+<script type="text/javaScript" language="javascript" defer="defer">
+$( document ).ready(function() {
+	<c:if test="${!empty msg}">
+		alert("${msg}");
+	</c:if>
 </script>
+error

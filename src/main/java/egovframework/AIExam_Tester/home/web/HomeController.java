@@ -31,6 +31,14 @@ public class HomeController {
 	public String main(HttpServletRequest request) throws Exception {
 		System.out.println("메인화면");
 		
+		//기기사용여부 확인
+		String checkInstYn = boardService.checkInst();
+		if(checkInstYn.equals("N")) {
+			msg = "이기기는 사용하실수 없습니다.";
+			request.setAttribute("msg", msg);
+			return "message";
+		}
+		
 		String orgNm = "";
 		try {
 			orgNm = boardService.getOrgNm();
@@ -58,7 +66,11 @@ public class HomeController {
 			}else if(trgter.equals("P")) {
 				notice = "선택하신 검사는 가족 치매검사 입니다.";
 			}else {
-				return "index";
+				msg = "문제 조회중 에러가 발생했습니다.";
+				url = "main.do";
+				request.setAttribute("msg", msg);
+				request.setAttribute("url", url);
+				return "message";
 			}
 			request.setAttribute("TRGTER", trgter);
 			request.setAttribute("notice", notice);
@@ -82,13 +94,17 @@ public class HomeController {
 		BoardVO boardVO = new BoardVO();
 		boardVO.setTrgter(trgter);
 		
+		//문제 갯수, 테이블width
 		int examCnt = 0;
+		double tableWidth = 0;
 		
 		//문제 불러오기
 		List<BoardVO> loadExamItem = null;
 		try {
 			loadExamItem = boardService.loadExamItem(boardVO);
 			examCnt = boardService.examCnt(boardVO);
+			tableWidth = 100 / (double)examCnt;
+			
 		}catch(Exception e) {
 			msg = "문제 조회중 에러가 발생했습니다.";
 			url = "main.do";
@@ -98,6 +114,7 @@ public class HomeController {
 		}
 		request.setAttribute("loadExamItem", loadExamItem);
 		request.setAttribute("examCnt", examCnt);
+		request.setAttribute("tableWidth", tableWidth);
 		request.setAttribute("trgter", trgter);
 		return "home/board";
 	}
@@ -120,9 +137,7 @@ public class HomeController {
 			String checkInstYn = boardService.checkInst();
 			if(checkInstYn.equals("N")) {
 				msg = "이기기는 사용하실수 없습니다.";
-				url = "main.do";
 				request.setAttribute("msg", msg);
-				request.setAttribute("url", url);
 				return "message";
 			}
 			

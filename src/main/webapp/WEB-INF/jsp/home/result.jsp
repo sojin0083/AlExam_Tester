@@ -25,30 +25,8 @@ $( document ).ready(function() {
 	</c:if>
 });
 
-window.onkeydown = function()	{
-	/* 방향키 좌  방향키 우 방향키 상*/
-	/*  	if(event.keyCode == 107){
-			button1_click();
-		}
-	 	if(event.keyCode == 106){
-			button2_click();
-		} 
-	 	if(event.keyCode == 109){
-			button2_click();
-		} */
-		
-		/* 방향키 좌  방향키 우 방향키 상*/
-	 	if(event.keyCode == 37){
-			button_click();
-		}
-		
-		else if(event.keyCode == 39){
-			button_click();
-		}
-		
-		else if(event.keyCode == 38){
-			button_click();
-		}
+window.onkeydown = function(){
+	button_click();
 };
 
 function button_click() {

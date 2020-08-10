@@ -183,14 +183,34 @@ window.onkeydown = function()	{
 	</div>
 	<div class="card text-center">
 		<div class="card-body align-self-center">
-		<button type="button" class="btn btn-danger btn-lg" 
-			id="button2"
-			style="font-size:100px; width: 200px; height: 200px;"
-			onclick="button1_click();">O</button>
-		<button type="button" class="btn btn-primary btn-lg" 
-			id="button1"
-			style="font-size:100px; width: 200px; height: 200px;"
-			onclick="button2_click();">X</button>
+			<c:if test="${trgter == 'M'}">
+				<button type="button" class="btn btn-danger btn-lg" 
+						id="button2"
+						style="font-size:100px; width: 200px; height: 200px;"
+						onclick="button1_click();">O</button>
+				<button type="button" class="btn btn-primary btn-lg" 
+						id="button1"
+						style="font-size:100px; width: 200px; height: 200px;"
+						onclick="button2_click();">X</button>
+			</c:if>
+			<c:if test="${trgter == 'P'}">
+				<button type="button" class="btn btn-success btn-lg" 
+						id="buttonA"
+						style="font-size:80px; width: 150px; height: 150px;"
+						onclick="buttonA_click();">0</button>
+				<button type="button" class="btn btn-success btn-lg" 
+						id="buttonB"
+						style="font-size:80px; width: 150px; height: 150px;"
+						onclick="buttonB_click();">1</button>
+				<button type="button" class="btn btn-success btn-lg" 
+						id="buttonC"
+						style="font-size:80px; width: 150px; height: 150px;"
+						onclick="buttonC_click();">2</button>
+				<button type="button" class="btn btn-success btn-lg" 
+						id="buttonD"
+						style="font-size:80px; width: 150px; height: 150px;"
+						onclick="buttonD_click();">9</button>
+			</c:if>
 		</div>
 		<div class="card-footer text-center">
 		<input type="hidden" id="resCnt" value="1">
@@ -198,7 +218,7 @@ window.onkeydown = function()	{
 			<thead class="thead-light">
 				<tr>
 					<c:forEach var="loadExamItem" items="${loadExamItem}">
-						<td>${loadExamItem.no}</td>
+						<td width="${tableWidth}%">${loadExamItem.no}</td>
 					</c:forEach>
 				</tr>
 			</thead>
