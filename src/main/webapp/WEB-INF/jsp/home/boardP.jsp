@@ -26,21 +26,30 @@ $( document ).ready(function() {
 	
 	var no = document.getElementById("no1");
 	var examItem = document.getElementById("examItem1");
-	
+	/* 역점수 문제 확인용 */
+	var examItemRe = document.getElementById("examItemRe1").value;
 	
 	noTR.style.display = 'inline';
 	examItemTR.style.display = 'inline';
 	no.style.display = 'inline';
 	examItem.style.display = 'inline';
+	
+	/* 역점수 문제 버튼전환 */
+	if(examItemRe == "Y"){
+		document.getElementById('buttonA').setAttribute('onclick','buttonA_click(0)');
+		document.getElementById('buttonB').setAttribute('onclick','buttonA_click(1)');
+	}else{
+		document.getElementById('buttonA').setAttribute('onclick','buttonA_click(1)');
+		document.getElementById('buttonB').setAttribute('onclick','buttonA_click(0)');
+	}
 });
 
-/* type M 결과처리*/
+/* type P 결과처리*/
 function buttonA_click(res) {
 	res_process(res);
 	item_process();
 }
 
-/* type P 결과처리*/
 function buttonB_click(res) {
 	res_process(res);
 	item_process();
@@ -76,13 +85,24 @@ function item_process() {
 		
 		var no = document.getElementById("no" + resCnt);
 		var examItem = document.getElementById("examItem" + resCnt);
+		/* 역점수 문제 확인용 */
+		var examItemRe = document.getElementById("examItemRe" + resCnt).value;
 		
 		noTR.style.display = 'inline';
 		examItemTR.style.display = 'inline';
 		no.style.display = 'inline';
 		examItem.style.display = 'inline';
+		
+		/* 역점수 문제 버튼전환 */
+		if(examItemRe == "Y"){
+			document.getElementById('buttonA').setAttribute('onclick','buttonA_click(0)');
+			document.getElementById('buttonB').setAttribute('onclick','buttonA_click(1)');
+		}else{
+			document.getElementById('buttonA').setAttribute('onclick','buttonA_click(1)');
+			document.getElementById('buttonB').setAttribute('onclick','buttonA_click(0)');
+		}
 	}
-} 
+}
 
 /* 결과 처리*/
 function res_process(res) {
@@ -90,7 +110,8 @@ function res_process(res) {
 	var examCnt = ${examCnt}+1
 	if(parseInt(resCnt) < examCnt){
 		document.getElementById("resCnt").value = parseInt(resCnt) + 1;
-		$('#an' + resCnt).text(res);
+		/* $('#an' + resCnt).text(res); */
+		$('#an' + resCnt).text('O'); 
 		document.getElementById("res" + resCnt).value = res; 
 	}
 	resCnt = document.getElementById("resCnt").value;
@@ -110,28 +131,21 @@ window.onkeydown = function()	{
  	if(event.keyCode == 109){
 		button2_click();
 	} */
-	var type = "${trgter}";
-	if(type == 'M'){
-		/* 방향키 좌  방향키 우 */
-	 	if(event.keyCode == 37){
-			buttonA_click("O");
+	
+	/* 방향키 좌  방향키 우 */
+	var resCnt = document.getElementById("resCnt").value;
+	var examItemRe = document.getElementById("examItemRe" + resCnt).value;
+ 	if(event.keyCode == 65){
+ 		if(examItemRe == "Y"){
+ 			buttonA_click(0);
+		}else{
+			buttonA_click(1);
 		}
-		
-		else if(event.keyCode == 39){
-			buttonA_click("X");
-		}
-	}else if(type == 'P'){
-		if(event.keyCode == 49){
-			buttonB_click("0");
-		}
-		if(event.keyCode == 50){
-			buttonB_click("1");
-		}
-		if(event.keyCode == 51){
-			buttonB_click("2");
-		}
-		if(event.keyCode == 52){
-			buttonB_click("9");
+	}else if(event.keyCode == 83){
+		if(examItemRe == "Y"){
+ 			buttonB_click(1);
+		}else{
+			buttonB_click(0);
 		}
 	}
 	
@@ -143,17 +157,6 @@ window.onkeydown = function()	{
 </script>
 </head>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-  <!-- Links -->
-<!--   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="board.html">진단하기</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="board2.html">진단완료목록</a>
-    </li>
-  </ul> -->
-  
   <ul class="navbar-nav">
   	<li class="nav-item">
       <a class="nav-link" href="#">치매검사</a>
@@ -177,6 +180,8 @@ window.onkeydown = function()	{
 					<td id="examItemCdTR<%=cnt%>" style="display:none;">
 						<!-- 문제코드 -->
 						<input type="hidden" id="examItemCd<%=cnt%>" value="${loadExamItem.examItemCd}">
+						<!-- 역점수 확인 -->
+						<input type="hidden" id="examItemRe<%=cnt%>" value="${loadExamItem.ckRe}">
 					</td>
 					<td id="noTR<%=cnt%>" style="display:none;">
 						<!-- 문제번호 -->
@@ -199,34 +204,14 @@ window.onkeydown = function()	{
 	</div>
 	<div class="card text-center">
 		<div class="card-body align-self-center">
-			<c:if test="${trgter == 'M'}">
-				<button type="button" class="btn btn-danger btn-lg" 
-						id="buttonA"
-						style="font-size:100px; width: 200px; height: 200px;"
-						onclick="buttonA_click('O');">O</button>
-				<button type="button" class="btn btn-primary btn-lg" 
-						id="buttonA"
-						style="font-size:100px; width: 200px; height: 200px;"
-						onclick="buttonA_click('X');">X</button>
-			</c:if>
-			<c:if test="${trgter == 'P'}">
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonA_click('0');">0</button>
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonB_click('1');">1</button>
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonB_click('2');">2</button>
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonB_click('9');">9</button>
-			</c:if>
+			<button type="button" class="btn btn-primary btn-lg" 
+					id="buttonA"
+					style="font-size:80px; width: 300px; height: 150px;"
+					onclick="buttonA_click('1');">예</button>
+			<button type="button" class="btn btn-success btn-lg" 
+					id="buttonB"
+					style="font-size:80px; width: 300px; height: 150px;"
+					onclick="buttonA_click('0');">아니오</button>
 		</div>
 		<div class="card-footer text-center">
 		<input type="hidden" id="resCnt" value="1">

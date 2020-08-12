@@ -20,7 +20,7 @@
 	
 	<!-- 문제가져오기 -->
 	<select id="loadExamItem" parameterType="BoardVO" resultType="BoardVO">
-		SELECT @rownum:=@rownum+1 AS no, TCKI.EXAM_ITEM_CD AS examItemCd, TCKI.EXAM_ITEM AS examItem, TCKI.TRGTER AS trgter
+		SELECT @rownum:=@rownum+1 AS no, TCKI.EXAM_ITEM_CD AS examItemCd, TCKI.EXAM_ITEM AS examItem, TCKI.TRGTER AS trgter, TCKI.CK_RE AS ckRe
 		FROM tm_cm_kdsqc_item AS TCKI, 
 			(SELECT @rownum:=0) TMP
 		WHERE 1=1
@@ -51,28 +51,30 @@
 		AND TCI.USE_YN = #{useYn}
 	</select>
 	
+	<!-- 결과저장 -->
 	<insert id="saveRes" parameterType="ResultVO">
 		INSERT INTO tm_cm_kdsqc_res
-		VALUES(#{rNumber}, #{trgter}, #{examItemCd}, #{resOx}, #{ckUp})
+		VALUES(#{rNumber}, #{rNumberSeq}, #{trgter}, #{examItemCd}, #{examRes}, #{ckUp})
 	</insert>
 	
-	<!-- 답안가져오기 -->
-	<select id="loadExamRes" parameterType="ResultVO" resultType="ResultVO">
-		SELECT TCKR.R_NUMBER AS rNumber, EXAM_ITEM_CD AS examItemCd, TCKR.RES_OX AS resOx
+	<!-- 점수가져오기 -->
+	<select id="loadExamResScore" parameterType="ResultVO" resultType="int">
+		SELECT SUM(TCKR.EXAM_RES)
 		FROM tm_cm_kdsqc_res AS TCKR
 		WHERE 1=1
 		AND TCKR.R_NUMBER = #{rNumber}
 		AND TCKR.TRGTER = #{trgter}
+		AND TCKR.R_NUMBER_SEQ = #{rNumberSeq}
 	</select>
 	
-	<!-- 답안가져오기 -->
-	<select id="loadExamResCnt" parameterType="ResultVO" resultType="int">
-		SELECT COUNT(*)
-		FROM tm_cm_kdsqc_res AS TCKR
-		WHERE 1=1
-		AND TCKR.R_NUMBER = #{rNumber}
-		AND TCKR.TRGTER = #{trgter}
-		AND TCKR.RES_OX = 'O'
+	<!-- 병록번호 시퀀스 가져오기 -->
+	<select id="getSeqMax" parameterType="String" resultType="int">
+		SELECT IFNULL(
+			(SELECT MAX(TCKR.R_NUMBER_SEQ)
+			FROM tm_cm_kdsqc_res AS TCKR
+			WHERE 1=1
+			AND TCKR.R_NUMBER = #{rNumber}
+			), 0) AS rNumberSeq
 	</select>
 	
 </mapper>

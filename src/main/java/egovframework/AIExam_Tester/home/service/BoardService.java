@@ -23,10 +23,10 @@ public interface BoardService {
 	//로컬DB에 결과 저장
 	void saveRes(ResultVO resVO);
 
-	//답안가져오기
-	List<ResultVO> loadExamRes(ResultVO resVO);
+	//점수가져오기
+	int loadExamResScore(ResultVO resVO);
 
-	//'O'갯수 불러오기
-	int loadExamResCnt(ResultVO resVO);
+	//병록번호 시퀀스 가져오기
+	int getSeqMax(String rNumber);
 
 }

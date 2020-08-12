@@ -2,9 +2,10 @@ package egovframework.AIExam_Tester.home.service;
 
 public class ResultVO {
 	public String rNumber;
+	public int rNumberSeq;
 	public String trgter;
 	public String examItemCd;
-	public String resOx;
+	public int examRes;
 	public String ckUp;
 	
 	public String getrNumber() {
@@ -12,6 +13,12 @@ public class ResultVO {
 	}
 	public void setrNumber(String rNumber) {
 		this.rNumber = rNumber;
+	}
+	public int getrNumberSeq() {
+		return rNumberSeq;
+	}
+	public void setrNumberSeq(int rNumberSeq) {
+		this.rNumberSeq = rNumberSeq;
 	}
 	public String getTrgter() {
 		return trgter;
@@ -25,11 +32,11 @@ public class ResultVO {
 	public void setExamItemCd(String examItemCd) {
 		this.examItemCd = examItemCd;
 	}
-	public String getResOx() {
-		return resOx;
+	public int getExamRes() {
+		return examRes;
 	}
-	public void setResOx(String resOx) {
-		this.resOx = resOx;
+	public void setExamRes(int examRes) {
+		this.examRes = examRes;
 	}
 	public String getCkUp() {
 		return ckUp;

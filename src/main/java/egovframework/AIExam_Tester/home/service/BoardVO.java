@@ -6,6 +6,7 @@ public class BoardVO {
 	public String examItem;
 	public String useYn;
 	public String trgter;
+	public String ckRe;
 	
 	public int getNo() {
 		return no;
@@ -36,5 +37,11 @@ public class BoardVO {
 	}
 	public void setTrgter(String trgter) {
 		this.trgter = trgter;
-	}	
+	}
+	public String getCkRe() {
+		return ckRe;
+	}
+	public void setCkRe(String ckRe) {
+		this.ckRe = ckRe;
+	}
 }

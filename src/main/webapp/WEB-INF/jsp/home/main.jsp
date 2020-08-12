@@ -37,27 +37,6 @@ window.onkeydown = function()	{
 	}
 };
 </script>
-
-<!-- <script language="javascript">
-var msg = new SpeechSynthesisUtterance();
-msg.lang = 'en-US';
-    function ttsTest(){
-
-          msg.rate = 1.2; // 0.1 ~ 10      
-          msg.pitch = 1.3; // 0 ~ 2
-       
-        msg.text = "당신의 기억력은 10년 전에 비해 저하되었습니까?";
-        speechSynthesis.speak(msg);
-        }
-    function setLang(langTxt){
-        msg.lang = langTxt;
-        }
-</script>
-<button onclick="setLang('euc-kr'); ttsTest();">Click2</button> -->
-
-
-
-
 </head>
 <body>
 	<div class="card text-center">
@@ -66,14 +45,14 @@ msg.lang = 'en-US';
 			<div class="card-body align-self-center">
 			<button type="button" class="btn btn-success btn-lg" 
 				id="button1"
-				style="font-size:40px; width: 400px; height: 200px;"
-				onclick="button1_click();">본인 치매검사</button>
+				style="font-size:40px; width: 500px; height: 200px;"
+				onclick="button1_click();">인지기능장애 평가도구</button>
 			<button type="button" class="btn btn-info btn-lg" 
 				id="button2"
-				style="font-size:40px; width: 400px; height: 200px;"
-				onclick="button2_click();">가족 치매검사</button>
+				style="font-size:40px; width: 500px; height: 200px;"
+				onclick="button2_click();">우울증 평가도구</button>
 			</div>
-			<h3>좌우 방향키를 눌러주세요.</h3>
+			<h3>버튼을 눌러주세요.</h3>
 		</div>
 		<div class="card-footer">
 			<h3>${ORG_NM}</h3>

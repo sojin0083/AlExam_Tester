@@ -58,15 +58,15 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		boardDAO.saveRes(resVO);
 	}
 
-	//답안가져오기
+	//점수가져오기
 	@Override
-	public List<ResultVO> loadExamRes(ResultVO resVO) {
-		return boardDAO.loadExamRes(resVO);
+	public int loadExamResScore(ResultVO resVO) {
+		return boardDAO.loadExamResScore(resVO);
 	}
 
-	//'O'갯수 불러오기
+	//병록번호 시퀀스 가져오기
 	@Override
-	public int loadExamResCnt(ResultVO resVO) {
-		return boardDAO.loadExamResCnt(resVO);
+	public int getSeqMax(String rNumber) {
+		return boardDAO.getSeqMax(rNumber);
 	}
 }

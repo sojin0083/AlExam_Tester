@@ -40,45 +40,13 @@ function button_click() {
 			검사결과~~~~~
 		</div>
 		<div class="card-body">
-			<h1>검사결과</h1>
-			<!-- 문제 + 결과 -->
-			<%-- <table class="table">
-				<thead>
-					<tr>
-						<th width="10%">번호</th>
-						<th width="80%">문제</th>
-						<th width="10%">결과</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="loadExamItem" items="${loadExamItem}" varStatus="status">
-					<tr>
-						<td>
-							${loadExamItem.no}
-						</td>
-						<td>
-							${loadExamItem.examItem}
-						</td>
-						<td>
-							${loadExamRes[status.index].resOx} 
-						</td>
-					</tr>
-					</c:forEach>
-					<tr>
-						<td colspan="3">
-							<h1>'O'갯수 : ${resCnt}개</h1>
-							<h2>상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명</h2>
-						</td>
-					</tr>
-				</tbody>
-			</table> --%>
-			
+			<h1>검사결과</h1>		
 			<!-- 결과 -->
 			<table class="table">
 				<thead>
 					<tr>
 						<td>
-							<h1>'O'갯수 : ${resCnt}개</h1>
+							<h1>점수 : ${resScore}점</h1>
 						</td>
 					</tr>
 				</thead>

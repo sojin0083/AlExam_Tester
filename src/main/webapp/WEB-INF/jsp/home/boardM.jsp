@@ -40,12 +40,6 @@ function buttonA_click(res) {
 	item_process();
 }
 
-/* type P 결과처리*/
-function buttonB_click(res) {
-	res_process(res);
-	item_process();
-}
-
 /* 리셋 key:m/109 */
 function button3_click() {
 	location.href = "main.do";
@@ -90,7 +84,8 @@ function res_process(res) {
 	var examCnt = ${examCnt}+1
 	if(parseInt(resCnt) < examCnt){
 		document.getElementById("resCnt").value = parseInt(resCnt) + 1;
-		$('#an' + resCnt).text(res);
+		/* $('#an' + resCnt).text(res); */
+		$('#an' + resCnt).text('O'); 
 		document.getElementById("res" + resCnt).value = res; 
 	}
 	resCnt = document.getElementById("resCnt").value;
@@ -113,25 +108,12 @@ window.onkeydown = function()	{
 	var type = "${trgter}";
 	if(type == 'M'){
 		/* 방향키 좌  방향키 우 */
-	 	if(event.keyCode == 37){
-			buttonA_click("O");
-		}
-		
-		else if(event.keyCode == 39){
-			buttonA_click("X");
-		}
-	}else if(type == 'P'){
-		if(event.keyCode == 49){
-			buttonB_click("0");
-		}
-		if(event.keyCode == 50){
-			buttonB_click("1");
-		}
-		if(event.keyCode == 51){
-			buttonB_click("2");
-		}
-		if(event.keyCode == 52){
-			buttonB_click("9");
+	 	if(event.keyCode == 65){
+			buttonA_click("0");
+		}else if(event.keyCode == 83){
+			buttonA_click("1");
+		}else if(event.keyCode == 68){
+			buttonA_click("2");
 		}
 	}
 	
@@ -143,17 +125,6 @@ window.onkeydown = function()	{
 </script>
 </head>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-  <!-- Links -->
-<!--   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="board.html">진단하기</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="board2.html">진단완료목록</a>
-    </li>
-  </ul> -->
-  
   <ul class="navbar-nav">
   	<li class="nav-item">
       <a class="nav-link" href="#">치매검사</a>
@@ -199,34 +170,18 @@ window.onkeydown = function()	{
 	</div>
 	<div class="card text-center">
 		<div class="card-body align-self-center">
-			<c:if test="${trgter == 'M'}">
-				<button type="button" class="btn btn-danger btn-lg" 
-						id="buttonA"
-						style="font-size:100px; width: 200px; height: 200px;"
-						onclick="buttonA_click('O');">O</button>
-				<button type="button" class="btn btn-primary btn-lg" 
-						id="buttonA"
-						style="font-size:100px; width: 200px; height: 200px;"
-						onclick="buttonA_click('X');">X</button>
-			</c:if>
-			<c:if test="${trgter == 'P'}">
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonA_click('0');">0</button>
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonB_click('1');">1</button>
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonB_click('2');">2</button>
-				<button type="button" class="btn btn-success btn-lg" 
-						id="buttonB"
-						style="font-size:80px; width: 150px; height: 150px;"
-						onclick="buttonB_click('9');">9</button>
-			</c:if>
+			<button type="button" class="btn btn-primary btn-lg" 
+					id="buttonA"
+					style="font-size:80px; width: 300px; height: 150px;"
+					onclick="buttonA_click('0');">아니다</button>
+			<button type="button" class="btn btn-success btn-lg" 
+					id="buttonA"
+					style="font-size:80px; width: 300px; height: 150px;"
+					onclick="buttonA_click('1');">가끔</button>
+			<button type="button" class="btn btn-danger btn-lg" 
+					id="buttonA"
+					style="font-size:80px; width: 300px; height: 150px;"
+					onclick="buttonA_click('2');">자주</button>
 		</div>
 		<div class="card-footer text-center">
 		<input type="hidden" id="resCnt" value="1">
