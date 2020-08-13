@@ -120,19 +120,10 @@ function res_process(res) {
 	}
 } 
 
-window.onkeydown = function()	{
-	/* 방향키 좌  방향키 우 방향키 상*/
-/*  	if(event.keyCode == 107){
-		button1_click();
-	}
- 	if(event.keyCode == 106){
-		button2_click();
-	} 
- 	if(event.keyCode == 109){
-		button2_click();
-	} */
+/* 키입력 수신 */
+/* 방향키 좌  방향키 우 */
+/* window.onkeydown = function()	{	
 	
-	/* 방향키 좌  방향키 우 */
 	var resCnt = document.getElementById("resCnt").value;
 	var examItemRe = document.getElementById("examItemRe" + resCnt).value;
  	if(event.keyCode == 65){
@@ -147,13 +138,13 @@ window.onkeydown = function()	{
 		}else{
 			buttonB_click(0);
 		}
-	}
+	} */
 	
 	/* 방향키 상*/
-	else if(event.keyCode == 38){
+/* 	else if(event.keyCode == 38){
 		button3_click();
 	}
-};
+}; */
 </script>
 </head>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">

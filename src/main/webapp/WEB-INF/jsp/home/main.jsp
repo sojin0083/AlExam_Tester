@@ -26,16 +26,16 @@ function button2_click() {
 	location.href = "loading.do?TRGTER=P";
 }
 
-window.onkeydown = function()	{
-	/* 방향키 좌 */
-	if(event.keyCode == /* 107 */37){
+/* 키입력 수신 */
+/* 방향키 좌/우 */
+/* window.onkeydown = function()	{
+	if(event.keyCode == 37){
 		button1_click();
 	}
-	/* 방향키 우 */
-	if(event.keyCode == /* 106 */39){
+	if(event.keyCode == 39){
 		button2_click();
 	}
-};
+}; */
 </script>
 </head>
 <body>

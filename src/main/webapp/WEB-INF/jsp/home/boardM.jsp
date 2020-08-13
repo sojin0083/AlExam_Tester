@@ -94,20 +94,11 @@ function res_process(res) {
 	}
 } 
 
-window.onkeydown = function()	{
-	/* 방향키 좌  방향키 우 방향키 상*/
-/*  	if(event.keyCode == 107){
-		button1_click();
-	}
- 	if(event.keyCode == 106){
-		button2_click();
-	} 
- 	if(event.keyCode == 109){
-		button2_click();
-	} */
+/* 방향키 좌  방향키 우 */
+/* 키입력 수신 */
+/* window.onkeydown = function()	{
 	var type = "${trgter}";
 	if(type == 'M'){
-		/* 방향키 좌  방향키 우 */
 	 	if(event.keyCode == 65){
 			buttonA_click("0");
 		}else if(event.keyCode == 83){
@@ -115,13 +106,13 @@ window.onkeydown = function()	{
 		}else if(event.keyCode == 68){
 			buttonA_click("2");
 		}
-	}
+	} */
 	
 	/* 방향키 상*/
-	else if(event.keyCode == 38){
+/* 	else if(event.keyCode == 38){
 		button3_click();
 	}
-};
+}; */
 </script>
 </head>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">

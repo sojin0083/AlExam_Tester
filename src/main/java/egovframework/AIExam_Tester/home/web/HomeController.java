@@ -26,6 +26,24 @@ public class HomeController {
 	//메세지처리
 	String msg = null, url = null;
 	
+	//로그인화면
+	@RequestMapping(value = "/login.do")
+	public String login(HttpServletRequest request) throws Exception {
+		System.out.println("로그인화면");
+		
+		try {
+			
+		}catch(Exception e) {
+			msg = "조회중 에러가 발생했습니다.";
+			url = "main.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("url", url);
+			return "message";
+		}
+		
+		return "home/login";
+	}
+	
 	//메인화면
 	@RequestMapping(value = "/main.do")
 	public String main(HttpServletRequest request) throws Exception {
@@ -62,9 +80,9 @@ public class HomeController {
 		
 		try {
 			if(trgter.equals("M")) {
-				notice = "선택하신 검사는 본인 치매검사 입니다.";
+				notice = "선택하신 검사는 인지기능장애 평가 입니다.";
 			}else if(trgter.equals("P")) {
-				notice = "선택하신 검사는 가족 치매검사 입니다.";
+				notice = "선택하신 검사는 가족 우울증 평가 입니다.";
 			}else {
 				msg = "문제 조회중 에러가 발생했습니다.";
 				url = "main.do";

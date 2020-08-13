@@ -17,54 +17,36 @@
 <script src="<c:url value='/css/bootstrap/js/jquery-3.5.1.min.js'/>"></script>
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <meta charset="UTF-8">
-<title>검사 결과</title>
+<title>치매진단 검사도구</title>
 <script type="text/javaScript" language="javascript" defer="defer">
-$( document ).ready(function() {
-	<c:if test="${!empty msg}">
-		alert("${msg}");
-	</c:if>
-});
-
-window.onkeydown = function(){
-	button_click();
-};
-
-function button_click() {
-	location.href = "main.do";
+function login_button() {
+	if($('#login_id').val() == ''){
+		alert("ID를 입력하세요.");
+		return false;
+	}
+	if($('#login_password').val() == ''){
+		alert("PASSWORD를 입력하세요.")
+		return false;
+	}
+	return true;
 }
+
 </script>
 </head>
 <body>
 	<div class="card text-center">
-		<div class="card-header">
-			검사결과~~~~~
-		</div>
 		<div class="card-body">
-			<h1>검사결과</h1>		
-			<!-- 결과 -->
-			<table class="table">
-				<thead>
-					<tr>
-						<td>
-							<h1>점수 : ${resScore}점</h1>
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<h2>상세설명상세설명상세설명상세설명상세설명상세설명상세설명상세설명</h2>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="card-body align-self-center">
-			<button type="button" class="btn btn-success btn-lg" 
-				id="button1"
-				style="font-size:30px; width: 200px; height: 100px;"
-				onclick="button_click();">돌아가기</button>
+			<h1>온라인 치매검사</h1>
+			<div class="card-body">
+				<form name="login" class="form-group" method="post" action="<c:url value='/login.do'/>">
+					<input type="text" class="form-control" name="id" id="login_id" placeholder="ID">
+					<input type="password" class="form-control" name="password" id="login_password" placeholder="PASSWORD">
+					<button type="submit" class="btn btn-success" onclick="return login_button()">로그인</button>
+				</form>
 			</div>
-			<h3>아무버튼이나 눌러주세요.</h3>
+		</div>
+		<div class="card-footer">
+		
 		</div>
 	</div>
 </body>
