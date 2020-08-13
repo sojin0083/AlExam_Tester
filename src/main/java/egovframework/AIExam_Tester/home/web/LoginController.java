@@ -135,7 +135,7 @@ public class LoginController {
 		for(int i = 0; i < cookies.length; i++) {
 			if((cookies[i].getName()).equals("orgCd")) {
 				System.out.println("값 : " + cookies[i].getName());
-				cookies[i].setMaxAge(1); // 특정 쿠키를 더 이상 사용하지 못하게 하기 위해서는 쿠키의 유효시간을 만료시킨다.
+				cookies[i].setMaxAge(0); // 특정 쿠키를 더 이상 사용하지 못하게 하기 위해서는 쿠키의 유효시간을 만료시킨다.
 				response.addCookie(cookies[i]); // 해당 쿠키를 응답에 추가(수정)한다.
 			}
 		}

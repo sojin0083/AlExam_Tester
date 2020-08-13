@@ -17,3 +17,19 @@
 <script src="<c:url value='/css/bootstrap/js/jquery-3.5.1.min.js'/>"></script>
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <meta charset="UTF-8">
+<%
+		boolean isLogin = false;
+		String orgCd = (String)session.getAttribute("orgCd");
+
+		if (orgCd != null){
+			isLogin = true;
+		}
+%>
+<script type="text/javaScript" language="javascript" defer="defer">
+$( document ).ready(function() {
+	<%	if (!isLogin){ %>
+	alert("로그인후 이용가능합니다.");
+	location.href="loginPage.do"
+	<% } %>
+});
+</script>
