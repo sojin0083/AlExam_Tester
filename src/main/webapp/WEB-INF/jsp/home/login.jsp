@@ -20,12 +20,12 @@
 <title>치매진단 검사도구</title>
 <script type="text/javaScript" language="javascript" defer="defer">
 function login_button() {
-	if($('#login_id').val() == ''){
-		alert("ID를 입력하세요.");
+	if($('#org_cd').val() == ''){
+		alert("기관코드를 입력하세요.");
 		return false;
 	}
-	if($('#login_password').val() == ''){
-		alert("PASSWORD를 입력하세요.")
+	if($('#org_pw').val() == ''){
+		alert("비밀번호를 입력하세요.")
 		return false;
 	}
 	return true;
@@ -39,8 +39,9 @@ function login_button() {
 			<h1>온라인 치매검사</h1>
 			<div class="card-body">
 				<form name="login" class="form-group" method="post" action="<c:url value='/login.do'/>">
-					<input type="text" class="form-control" name="id" id="login_id" placeholder="ID">
-					<input type="password" class="form-control" name="password" id="login_password" placeholder="PASSWORD">
+					<input type="text" class="form-control" name="ORG_CD" id="org_cd" placeholder="기관코드">
+					<input type="password" class="form-control" name="ORG_PW" id="org_pw" placeholder="비밀번호">
+					<input class="form-check-input" type="checkbox" name="AUTO_LOGIN">자동로그인
 					<button type="submit" class="btn btn-success" onclick="return login_button()">로그인</button>
 				</form>
 			</div>

@@ -25,6 +25,9 @@ function button1_click() {
 function button2_click() {
 	location.href = "loading.do?TRGTER=P";
 }
+function logout_click() {
+	location.href = "logout.do";
+}
 
 /* 키입력 수신 */
 /* 방향키 좌/우 */
@@ -56,6 +59,7 @@ function button2_click() {
 		</div>
 		<div class="card-footer">
 			<h3>${ORG_NM}</h3>
+			<button type="button" class="btn btn-danger btn-lg" onclick="logout_click();">로그아웃</button>
 		</div>
 	</div>
 </body>

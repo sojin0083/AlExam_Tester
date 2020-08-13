@@ -9,5 +9,6 @@
 		<typeAlias alias="instVO" type="egovframework.AIExam_Tester.home.service.BoardVO"/>
 		<typeAlias alias="boardVO" type="egovframework.AIExam_Tester.home.service.BoardVO"/>
 		<typeAlias alias="resultVO" type="egovframework.AIExam_Tester.home.service.ResultVO"/>
+		<typeAlias alias="loginVO" type="egovframework.AIExam_Tester.home.service.LoginVO"/>
     </typeAliases>
 </configuration>

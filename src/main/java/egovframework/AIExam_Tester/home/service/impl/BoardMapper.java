@@ -10,7 +10,7 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 @Mapper("boardMapper")
 public interface BoardMapper {
 
-	//병원이름
+	//기관이름
 	String getOrgNm();
 	
 	//문제갯수불러오기

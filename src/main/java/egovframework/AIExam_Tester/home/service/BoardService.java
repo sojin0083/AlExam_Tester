@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BoardService {
 	
-	//병원 이름
+	//기관이름
 	String getOrgNm();
 	
 	//문제갯수 불러오기

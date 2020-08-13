@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="egovframework.AIExam_Tester.home.service.impl.BoardMapper">
-	<!-- 병원이름 -->
+	<!-- 기관이름 -->
 	<select id="getOrgNm" resultType="String">
 		SELECT TCI.ORG_NM
 		FROM tc_cm_inst AS TCI
@@ -30,9 +30,8 @@
 	
 	<!-- 기기사용여부 확인 -->
 	<select id="checkInst" resultType="String">
-		SELECT TCI.USE_YN
-		FROM tc_cm_inst AS TCI
-		WHERE 1=1
+		SELECT TCO.USE_YN
+		FROM TC_CM_ORG AS TCO
 	</select>
 	
 	<!-- 기관코드 -->

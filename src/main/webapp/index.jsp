@@ -6,4 +6,4 @@ $( document ).ready(function() {
 	</c:if>
 });
 </script>
-<jsp:forward page="/main.do"/>
+<jsp:forward page="/loginPage.do"/>
