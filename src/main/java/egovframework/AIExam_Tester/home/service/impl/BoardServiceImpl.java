@@ -38,8 +38,8 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 	
 	//기기사용여부확인
 	@Override
-	public String checkInst() {
-		return boardDAO.checkInst();
+	public String checkInst(InstVO instVO) {
+		return boardDAO.checkInst(instVO);
 	}
 
 	//병록번호를 위한 기관/기기코드
@@ -66,7 +66,7 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 
 	//병록번호 시퀀스 가져오기
 	@Override
-	public int getSeqMax(String rNumber) {
-		return boardDAO.getSeqMax(rNumber);
+	public int getSeqMax(ResultVO resVO) {
+		return boardDAO.getSeqMax(resVO);
 	}
 }

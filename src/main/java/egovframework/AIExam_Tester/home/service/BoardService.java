@@ -14,7 +14,7 @@ public interface BoardService {
 	List<BoardVO> loadExamItem(BoardVO boardVO);
 
 	//기기사용여부 확인
-	String checkInst();
+	String checkInst(InstVO instVO);
 
 	//병록번호를 위한 기관/기기코드
 	String loadOrgCd(InstVO instVO);
@@ -27,6 +27,6 @@ public interface BoardService {
 	int loadExamResScore(ResultVO resVO);
 
 	//병록번호 시퀀스 가져오기
-	int getSeqMax(String rNumber);
+	int getSeqMax(ResultVO resVO);
 
 }

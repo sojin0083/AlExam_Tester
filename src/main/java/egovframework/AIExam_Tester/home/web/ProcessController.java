@@ -83,15 +83,17 @@ public class ProcessController {
 			@RequestParam("TRGTER") String trgter) throws Exception {
 		System.out.println("결과 불러오기 화면");
 		
-		String orgCd, instCd, rNumber = "";
+		//기관코드, 기기코드, 
+		String rNumOrg, rNumInst, rNumDate = "";
 		int resScore = 0;
-		int rNumberSeq = 0;
+		int rNumSeq = 0;
 		
 		InstVO instVO = new InstVO();
 		ResultVO resVO = new ResultVO();
 		try {
 			//기기사용여부 확인
-			String checkInstYn = boardService.checkInst();
+			instVO.setOrgCd((String) session.getAttribute("orgCd"));
+			String checkInstYn = boardService.checkInst(instVO);
 			if(checkInstYn.equals("N")) {
 				msg = "이기기는 사용하실수 없습니다.";
 				request.setAttribute("msg", msg);
@@ -100,25 +102,22 @@ public class ProcessController {
 			
 			//기관코드, 기기코드 가져오기
 			instVO.setUseYn("Y");
-			orgCd = boardService.loadOrgCd(instVO);
-			instCd = boardService.loadInstCd(instVO);
+			rNumOrg = (String) session.getAttribute("orgCd");
+			rNumInst = "001"; //**********임시용 추후 변경**********
 			
 			//날짜가져오기
-			SimpleDateFormat format1 = new SimpleDateFormat ( "-yyMMdd");
+			SimpleDateFormat format1 = new SimpleDateFormat ( "yyMMdd");
 			Date time = new Date();
-			String now = format1.format(time);
-						
-			//병록번호 제작1
-			rNumber = orgCd + instCd + now;
-			
+			rNumDate = format1.format(time);
+									
 			//병록번호 시퀀스 가져오기
-			rNumberSeq = boardService.getSeqMax(rNumber) + 1;
+			resVO.setrNumOrg(rNumOrg);
+			resVO.setrNumInst(rNumInst);
+			resVO.setrNumDate(rNumDate);
+			rNumSeq = boardService.getSeqMax(resVO) + 1;
 						
 			//DB저장
-			resVO.setrNumber(rNumber);
-			resVO.setrNumberSeq(rNumberSeq);
-			resVO.setTrgter(trgter);
-			resVO.setCkUp("N");
+			resVO.setrNumSeq(rNumSeq);
 			for(int i = 0; i < res.length; i++) {
 				resVO.setExamItemCd(examItemCd[i]);
 				resVO.setExamRes(res[i]);
@@ -135,9 +134,7 @@ public class ProcessController {
 		//결과 불러오기
 		BoardVO boardVO = new BoardVO();
 		boardVO.setTrgter(trgter);
-		resVO.setrNumber(rNumber);
-		resVO.setrNumberSeq(rNumberSeq);
-
+		
 		try {
 			//치매검사 점수계산
 //			if(trgter.equals(KDSQC)) {

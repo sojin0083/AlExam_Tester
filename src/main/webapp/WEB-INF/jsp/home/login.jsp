@@ -41,7 +41,7 @@ function login_button() {
 				<form name="login" class="form-group" method="post" action="<c:url value='/login.do'/>">
 					<input type="text" class="form-control" name="ORG_CD" id="org_cd" placeholder="기관코드">
 					<input type="password" class="form-control" name="ORG_PW" id="org_pw" placeholder="비밀번호">
-					<input class="form-check-input" type="checkbox" name="AUTO_LOGIN">자동로그인
+					<input class="form-check-input" type="checkbox" name="AUTO_LOGIN" value="yes">자동로그인
 					<button type="submit" class="btn btn-success" onclick="return login_button()">로그인</button>
 				</form>
 			</div>

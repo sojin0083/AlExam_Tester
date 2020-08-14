@@ -37,7 +37,9 @@ public class HomeController {
 		System.out.println("메인화면");
 		
 		//기기사용여부 확인
-		String checkInstYn = boardService.checkInst();
+		InstVO instVO = new InstVO();
+		instVO.setOrgCd((String) session.getAttribute("orgCd"));
+		String checkInstYn = boardService.checkInst(instVO);
 		if(checkInstYn.equals("N")) {
 			msg = "이기기는 사용하실수 없습니다.";
 			request.setAttribute("msg", msg);

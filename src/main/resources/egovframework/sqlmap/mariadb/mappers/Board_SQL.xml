@@ -29,9 +29,10 @@
 	</select>
 	
 	<!-- 기기사용여부 확인 -->
-	<select id="checkInst" resultType="String">
+	<select id="checkInst" parameterType="InstVO" resultType="String">
 		SELECT TCO.USE_YN
 		FROM TC_CM_ORG AS TCO
+		WHERE TCO.ORG_CD = #{orgCd}
 	</select>
 	
 	<!-- 기관코드 -->
@@ -53,7 +54,7 @@
 	<!-- 결과저장 -->
 	<insert id="saveRes" parameterType="ResultVO">
 		INSERT INTO tm_cm_kdsqc_res
-		VALUES(#{rNumber}, #{rNumberSeq}, #{trgter}, #{examItemCd}, #{examRes}, #{ckUp})
+		VALUES(#{rNumOrg}, #{rNumInst}, #{rNumDate}, #{rNumSeq}, #{examItemCd}, #{examRes})
 	</insert>
 	
 	<!-- 점수가져오기 -->
@@ -61,18 +62,21 @@
 		SELECT SUM(TCKR.EXAM_RES)
 		FROM tm_cm_kdsqc_res AS TCKR
 		WHERE 1=1
-		AND TCKR.R_NUMBER = #{rNumber}
-		AND TCKR.TRGTER = #{trgter}
-		AND TCKR.R_NUMBER_SEQ = #{rNumberSeq}
+		AND TCKR.KDSQC_NUM_ORG = #{rNumOrg}
+		AND TCKR.KDSQC_NUM_INST = #{rNumInst}
+		AND TCKR.KDSQC_NUM_DATE = #{rNumDate}
+		AND TCKR.KDSQC_NUM_SEQ = #{rNumSeq}
 	</select>
 	
 	<!-- 병록번호 시퀀스 가져오기 -->
 	<select id="getSeqMax" parameterType="String" resultType="int">
 		SELECT IFNULL(
-			(SELECT MAX(TCKR.R_NUMBER_SEQ)
+			(SELECT MAX(TCKR.KDSQC_NUM_SEQ)
 			FROM tm_cm_kdsqc_res AS TCKR
 			WHERE 1=1
-			AND TCKR.R_NUMBER = #{rNumber}
+			AND TCKR.KDSQC_NUM_ORG = #{rNumOrg}
+			AND TCKR.KDSQC_NUM_INST = #{rNumInst}
+			AND TCKR.KDSQC_NUM_DATE = #{rNumDate}
 			), 0) AS rNumberSeq
 	</select>
 	

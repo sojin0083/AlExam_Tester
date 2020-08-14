@@ -1,30 +1,43 @@
 package egovframework.AIExam_Tester.home.service;
 
 public class ResultVO {
-	public String rNumber;
-	public int rNumberSeq;
-	public String trgter;
+	public String rNumOrg;
+	public String rNumInst;
+	public String rNumDate;
+	public int rNumSeq;
+	public String examType;
 	public String examItemCd;
 	public int examRes;
-	public String ckUp;
 	
-	public String getrNumber() {
-		return rNumber;
+	public String getrNumOrg() {
+		return rNumOrg;
 	}
-	public void setrNumber(String rNumber) {
-		this.rNumber = rNumber;
+	public void setrNumOrg(String rNumOrg) {
+		this.rNumOrg = rNumOrg;
 	}
-	public int getrNumberSeq() {
-		return rNumberSeq;
+	public String getrNumInst() {
+		return rNumInst;
 	}
-	public void setrNumberSeq(int rNumberSeq) {
-		this.rNumberSeq = rNumberSeq;
+	public void setrNumInst(String rNumInst) {
+		this.rNumInst = rNumInst;
 	}
-	public String getTrgter() {
-		return trgter;
+	public String getrNumDate() {
+		return rNumDate;
 	}
-	public void setTrgter(String trgter) {
-		this.trgter = trgter;
+	public void setrNumDate(String rNumDate) {
+		this.rNumDate = rNumDate;
+	}
+	public int getrNumSeq() {
+		return rNumSeq;
+	}
+	public void setrNumSeq(int rNumSeq) {
+		this.rNumSeq = rNumSeq;
+	}
+	public String getExamType() {
+		return examType;
+	}
+	public void setExamType(String examType) {
+		this.examType = examType;
 	}
 	public String getExamItemCd() {
 		return examItemCd;
@@ -37,11 +50,5 @@ public class ResultVO {
 	}
 	public void setExamRes(int examRes) {
 		this.examRes = examRes;
-	}
-	public String getCkUp() {
-		return ckUp;
-	}
-	public void setCkUp(String ckUp) {
-		this.ckUp = ckUp;
 	}
 }
