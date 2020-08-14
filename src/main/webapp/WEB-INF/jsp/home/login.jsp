@@ -18,6 +18,22 @@
 <script src="<c:url value='/css/bootstrap/js/bootstrap.min.js'/>"></script>
 <meta charset="UTF-8">
 <title>치매진단 검사도구</title>
+<%
+		boolean isLogin = false;
+		String orgCd = (String)session.getAttribute("orgCd");
+		String orgNm = (String)session.getAttribute("orgNm");
+
+		if (orgCd != null){
+			isLogin = true;
+		}
+%>
+<script type="text/javaScript" language="javascript" defer="defer">
+$( document ).ready(function() {
+	<%	if (isLogin){ %>
+	location.href="main.do"
+	<% } %>
+});
+</script>
 <script type="text/javaScript" language="javascript" defer="defer">
 function login_button() {
 	if($('#org_cd').val() == ''){

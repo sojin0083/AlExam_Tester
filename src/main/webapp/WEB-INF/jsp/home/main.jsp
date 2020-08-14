@@ -3,10 +3,10 @@
 <title>치매진단 검사도구</title>
 <script type="text/javaScript" language="javascript" defer="defer">
 function button1_click() {
-	location.href = "loading.do?TRGTER=M";
+	location.href = "loading.do?EXAM_TYPE=KDSQC";
 }
 function button2_click() {
-	location.href = "loading.do?TRGTER=P";
+	location.href = "loading.do?EXAM_TYPE=GDS";
 }
 function logout_click() {
 	location.href = "logout.do";

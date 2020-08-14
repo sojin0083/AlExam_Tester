@@ -62,14 +62,14 @@ public class HomeController {
 	
 	//로딩화면
 	@RequestMapping(value = "/loading.do")
-	public String loading(HttpServletRequest request, @RequestParam("TRGTER") String trgter) throws Exception {
+	public String loading(HttpServletRequest request, @RequestParam("EXAM_TYPE") String examType) throws Exception {
 		System.out.println("로딩화면");
 		String notice = "";
 		
 		try {
-			if(trgter.equals("M")) {
+			if(examType.equals("KDSQC")) {
 				notice = "선택하신 검사는 인지기능장애 평가 입니다.";
-			}else if(trgter.equals("P")) {
+			}else if(examType.equals("GDS")) {
 				notice = "선택하신 검사는 가족 우울증 평가 입니다.";
 			}else {
 				msg = "문제 조회중 에러가 발생했습니다.";
@@ -78,7 +78,7 @@ public class HomeController {
 				request.setAttribute("url", url);
 				return "message";
 			}
-			request.setAttribute("TRGTER", trgter);
+			request.setAttribute("EXAM_TYPE", examType);
 			request.setAttribute("notice", notice);
 		}catch(Exception e) {
 			msg = "문제 조회중 에러가 발생했습니다.";

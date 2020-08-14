@@ -9,11 +9,11 @@ $( document ).ready(function() {
 });
 
 function main() {
-	var TRGTER = "${TRGTER}";
-	if(TRGTER == "M"){
-		location.href = "testPage.do?TRGTER=M";
-	}else if(TRGTER == "P"){
-		location.href = "testPage.do?TRGTER=P";
+	var EXAM_TYPE = "${EXAM_TYPE}";
+	if(EXAM_TYPE == "KDSQC"){
+		location.href = "testPage.do?EXAM_TYPE=KDSQC";
+	}else if(EXAM_TYPE == "GDS"){
+		location.href = "testPage.do?EXAM_TYPE=GDS";
 	}else{
 		location.href = "main.do"
 	}

@@ -27,18 +27,18 @@ public class ProcessController {
 	String msg = null, url = null;
 	
 	//인지기능장애 평가도구 판별
-	String KDSQC = "M";
+	String KDSQC = "KDSQC";
 	//GDS판별
-	String GDS = "P";
+	String GDS = "GDS";
 		
 	//테스트화면
 	@RequestMapping(value = "/testPage.do")
 	public String testPage(HttpServletRequest request,  HttpSession session, 
-			@RequestParam("TRGTER") String trgter) throws Exception {
+			@RequestParam("EXAM_TYPE") String examType) throws Exception {
 		System.out.println("테스트화면");
 		
 		BoardVO boardVO = new BoardVO();
-		boardVO.setTrgter(trgter);
+		boardVO.setExamType(examType);
 		
 		//문제 갯수, 테이블width
 		int examCnt = 0;
@@ -60,11 +60,11 @@ public class ProcessController {
 		request.setAttribute("loadExamItem", loadExamItem);
 		request.setAttribute("examCnt", examCnt);
 		request.setAttribute("tableWidth", tableWidth);
-		request.setAttribute("trgter", trgter);
+		request.setAttribute("examType", examType);
 		
-		if(trgter.equals(KDSQC)) {
+		if(examType.equals(KDSQC)) {
 			return "home/boardM";
-		}else if(trgter.equals(GDS)) {
+		}else if(examType.equals(GDS)) {
 			return "home/boardP";
 		}else {
 			msg = "문제 조회중 에러가 발생했습니다.";
@@ -79,8 +79,7 @@ public class ProcessController {
 	@RequestMapping(value = "/result_load.do")
 	public String result_load(HttpServletRequest request,  HttpSession session, 
 			@RequestParam("examItemCd") String[] examItemCd,
-			@RequestParam("res") int[] res,
-			@RequestParam("TRGTER") String trgter) throws Exception {
+			@RequestParam("res") int[] res) throws Exception {
 		System.out.println("결과 불러오기 화면");
 		
 		//기관코드, 기기코드, 
@@ -130,11 +129,7 @@ public class ProcessController {
 			request.setAttribute("url", url);
 			return "message";
 		}
-		
-		//결과 불러오기
-		BoardVO boardVO = new BoardVO();
-		boardVO.setTrgter(trgter);
-		
+				
 		try {
 			//치매검사 점수계산
 //			if(trgter.equals(KDSQC)) {
@@ -151,7 +146,6 @@ public class ProcessController {
 			return "message";
 		}
 		request.setAttribute("resScore", resScore);
-		request.setAttribute("trgter", trgter);
 		
 		return "home/result";
 	}

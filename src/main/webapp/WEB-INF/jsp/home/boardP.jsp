@@ -219,7 +219,6 @@ function res_process(res) {
 							cnt = cnt + 1;
 						%>
 					</c:forEach>
-					<input type="hidden" name="TRGTER" value="${trgter}">
 					<c:forEach var="loadExamItem" items="${loadExamItem}">
 						<!-- 문제코드 --> 
 						<input type="hidden" name="examItemCd"value="${loadExamItem.examItemCd}">		

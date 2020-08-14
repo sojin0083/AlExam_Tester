@@ -14,17 +14,17 @@
 		SELECT count(*)
 		FROM tm_cm_kdsqc_item AS TCKI
 		WHERE 1=1
-		AND TCKI.TRGTER = #{trgter}
+		AND TCKI.EXAM_TYPE = #{examType}
 		AND TCKI.USE_YN = 'Y'
 	</select>
 	
 	<!-- 문제가져오기 -->
 	<select id="loadExamItem" parameterType="BoardVO" resultType="BoardVO">
-		SELECT @rownum:=@rownum+1 AS no, TCKI.EXAM_ITEM_CD AS examItemCd, TCKI.EXAM_ITEM AS examItem, TCKI.TRGTER AS trgter, TCKI.CK_RE AS ckRe
+		SELECT @rownum:=@rownum+1 AS no, TCKI.EXAM_ITEM_CD AS examItemCd, TCKI.EXAM_ITEM AS examItem, TCKI.EXAM_TYPE AS examType, TCKI.CK_RE AS ckRe
 		FROM tm_cm_kdsqc_item AS TCKI, 
 			(SELECT @rownum:=0) TMP
 		WHERE 1=1
-		AND TCKI.TRGTER = #{trgter}
+		AND TCKI.EXAM_TYPE = #{examType}
 		AND TCKI.USE_YN = 'Y'
 	</select>
 	
