@@ -23,7 +23,7 @@
 		String orgCd = (String)session.getAttribute("orgCd");
 		String orgNm = (String)session.getAttribute("orgNm");
 
-		if (orgCd != null){
+		if (orgCd != null && orgNm != null){
 			isLogin = true;
 		}
 %>
@@ -46,7 +46,6 @@ function login_button() {
 	}
 	return true;
 }
-
 </script>
 </head>
 <body>

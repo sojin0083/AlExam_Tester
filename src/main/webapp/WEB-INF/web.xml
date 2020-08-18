@@ -71,5 +71,10 @@
 		<error-code>500</error-code>
 		<location>/common/error.jsp</location>
 	</error-page>
+	
+	<!-- 세션시간 30일 -->
+	<session-config>
+    	<session-timeout>480</session-timeout>                                                
+	</session-config>
     
 </web-app>
