@@ -12,7 +12,7 @@
 	<!-- 문제 갯수가져오기 -->
 	<select id="examCnt" parameterType="BoardVO" resultType="int">
 		SELECT count(*)
-		FROM tm_cm_kdsqc_item AS TCKI
+		FROM TM_CM_KDSQC_ITEM AS TCKI
 		WHERE 1=1
 		AND TCKI.EXAM_TYPE = #{examType}
 		AND TCKI.USE_YN = 'Y'
@@ -21,7 +21,7 @@
 	<!-- 문제가져오기 -->
 	<select id="loadExamItem" parameterType="BoardVO" resultType="BoardVO">
 		SELECT @rownum:=@rownum+1 AS no, TCKI.EXAM_ITEM_CD AS examItemCd, TCKI.EXAM_ITEM AS examItem, TCKI.EXAM_TYPE AS examType, TCKI.CK_RE AS ckRe
-		FROM tm_cm_kdsqc_item AS TCKI, 
+		FROM TM_CM_KDSQC_ITEM AS TCKI, 
 			(SELECT @rownum:=0) TMP
 		WHERE 1=1
 		AND TCKI.EXAM_TYPE = #{examType}
@@ -53,14 +53,14 @@
 	
 	<!-- 결과저장 -->
 	<insert id="saveRes" parameterType="ResultVO">
-		INSERT INTO tm_cm_kdsqc_res
+		INSERT INTO TM_CM_KDSQC_RES
 		VALUES(#{rNumOrg}, #{rNumInst}, #{rNumDate}, #{rNumSeq}, #{examItemCd}, #{examRes})
 	</insert>
 	
 	<!-- 점수가져오기 -->
 	<select id="loadExamResScore" parameterType="ResultVO" resultType="int">
 		SELECT SUM(TCKR.EXAM_RES)
-		FROM tm_cm_kdsqc_res AS TCKR
+		FROM TM_CM_KDSQC_RES AS TCKR
 		WHERE 1=1
 		AND TCKR.KDSQC_NUM_ORG = #{rNumOrg}
 		AND TCKR.KDSQC_NUM_INST = #{rNumInst}
@@ -72,7 +72,7 @@
 	<select id="getSeqMax" parameterType="String" resultType="int">
 		SELECT IFNULL(
 			(SELECT MAX(TCKR.KDSQC_NUM_SEQ)
-			FROM tm_cm_kdsqc_res AS TCKR
+			FROM TM_CM_KDSQC_RES AS TCKR
 			WHERE 1=1
 			AND TCKR.KDSQC_NUM_ORG = #{rNumOrg}
 			AND TCKR.KDSQC_NUM_INST = #{rNumInst}

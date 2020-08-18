@@ -131,12 +131,6 @@ public class ProcessController {
 		}
 				
 		try {
-			//치매검사 점수계산
-//			if(trgter.equals(KDSQC)) {
-//				resScore = boardService.loadExamResScore(resVO);
-//			}else if(trgter.equals(GDS)) {
-//				resScore = boardService.loadExamResScore(resVO);
-//			}
 			resScore = boardService.loadExamResScore(resVO); 
 		}catch(Exception e) {
 			msg = "정보를 불러오는데 실패했습니다.";
