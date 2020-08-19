@@ -9,9 +9,6 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 @Mapper("boardMapper")
 public interface BoardMapper {
-
-	//기관이름
-	String getOrgNm();
 	
 	//문제갯수불러오기
 	int examCnt(BoardVO boardVO);

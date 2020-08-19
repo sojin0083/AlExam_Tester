@@ -3,10 +3,7 @@ package egovframework.AIExam_Tester.home.service;
 import java.util.List;
 
 public interface BoardService {
-	
-	//기관이름
-	String getOrgNm();
-	
+		
 	//문제갯수 불러오기
 	int examCnt(BoardVO boardVO);
 	

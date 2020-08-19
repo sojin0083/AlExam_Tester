@@ -38,12 +38,13 @@ public class LoginController {
 		
 		try {
 			Cookie[] cookies = request.getCookies();
-			if(cookies != null) {//java.lang.NullPointerException 방지
-				System.out.println("쿠키갯수 : " + cookies.length);
-				for (int i = 0; i < cookies.length; i++) { // 쿠키 배열을 반복문으로 돌린다.
-					System.out.println(i + "번째 쿠키 이름 : " + cookies[i].getName()); // 쿠키의 이름을 가져온다.
-					System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue()); // 쿠키의 값을 가져온다.
-				}
+			if(cookies != null) {		//java.lang.NullPointerException 방지
+				//쿠키값 확인
+//				System.out.println("쿠키갯수 : " + cookies.length);
+//				for (int i = 0; i < cookies.length; i++) {								// 쿠키 배열을 반복문으로 돌린다.
+//					System.out.println(i + "번째 쿠키 이름 : " + cookies[i].getName()); 		// 쿠키의 이름을 가져온다.
+//					System.out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue()); // 쿠키의 값을 가져온다.
+//				}
 				
 				for(int i = 0; i < cookies.length; i++) {
 					if(cookies[i].getName().equals("orgCd")) {
@@ -62,6 +63,11 @@ public class LoginController {
 		}
 		catch(Exception e) {
 			System.out.println("에러 : " + e);
+			msg = "쿠키오류. 쿠키를 지우고 시도하세요.";
+			url = "main.do";
+			request.setAttribute("msg" , msg + "에러 : " + e);
+			request.setAttribute("url", url);
+			return "message";
 		}
 
 		return "home/login";
@@ -97,11 +103,11 @@ public class LoginController {
 					Cookie infoCd = new Cookie("orgCd", orgCd);
 					Cookie infoNm = new Cookie("orgNm", orgNm);
 					Cookie autoLogin = new Cookie("autoLogin", "yes");
-					infoCd.setMaxAge(30*24*60*60);	// 쿠키의 유효기간을 30일로 설정한다.30*24*60*60
+					infoCd.setMaxAge(30*24*60*60);		// 쿠키의 유효기간을 30일로 설정한다.30*24*60*60
 					infoNm.setMaxAge(30*24*60*60);
 					infoCd.setPath("/");				// 쿠키의 유효한 디렉토리를 "/" 로 설정한다.
 					infoNm.setPath("/");
-					response.addCookie(infoCd);		// 클라이언트 응답에 쿠키를 추가한다.
+					response.addCookie(infoCd);			// 클라이언트 응답에 쿠키를 추가한다.
 					response.addCookie(infoNm);
 					System.out.println("쿠키저장");
 				}else {
@@ -120,7 +126,7 @@ public class LoginController {
 		}catch(Exception e) {
 			msg = "기관정보가 없습니다.";
 			url = "loginPage.do";
-			request.setAttribute("msg", msg);
+			request.setAttribute("msg", msg + "에러 : " + e);
 			request.setAttribute("url", url);
 			return "message";
 		}

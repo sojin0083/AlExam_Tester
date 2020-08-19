@@ -49,7 +49,7 @@ public class HomeController {
 		}catch(Exception e) {
 			msg = "해당기관은 사용하실수 없습니다.";
 			url = "main.do";
-			request.setAttribute("msg" + "에러 : " + e, msg);
+			request.setAttribute("msg", msg + "에러 : " + e);
 			request.setAttribute("url", url);
 			return "message";
 		}
@@ -60,7 +60,7 @@ public class HomeController {
 		}catch(Exception e) {
 			msg = "조회중 에러가 발생했습니다.";
 			url = "main.do";
-			request.setAttribute("msg", msg);
+			request.setAttribute("msg", msg + "에러 : " + e);
 			request.setAttribute("url", url);
 			return "message";
 		}
@@ -91,7 +91,7 @@ public class HomeController {
 		}catch(Exception e) {
 			msg = "문제 조회중 에러가 발생했습니다.";
 			url = "main.do";
-			request.setAttribute("msg", msg);
+			request.setAttribute("msg", msg + "에러 : " + e);
 			request.setAttribute("url", url);
 			return "message";
 		}

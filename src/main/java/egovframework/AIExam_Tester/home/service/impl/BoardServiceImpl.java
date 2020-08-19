@@ -17,12 +17,6 @@ import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardService {
 	@Resource(name="boardMapper")
 	private BoardMapper boardDAO;
-	
-	//기관이름
-	@Override
-	public String getOrgNm() {
-		return boardDAO.getOrgNm();
-	}
 
 	//문제갯수 불러오기
 	@Override
